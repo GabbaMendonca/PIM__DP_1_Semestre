@@ -26,7 +26,7 @@
 
 #define MIN 3
 #define MED 50
-#define MAX 100
+#define SIZE 100
 
 
 
@@ -91,11 +91,10 @@ int numPalestra = 0;
 
 
 /*
-    ================
+    ===============================
     $STRUCT_FIM_CADASTRAR_PALESTRA$
-    ================
+    ===============================
 */
-
 
 
 
@@ -117,9 +116,10 @@ int numPalestra = 0;
  * 
  * O programa foi montado de maneira que as funções que inserem uma informação no sistema
  * sejam independentes, de maneira que para alterar é necessario chamar a função que corresponde
- * ao mesmo.
+ * a ação desejada.
  * 
- * Esta função gerencia as principais tomadas de decisão em cadastro de pessoas.
+ * Esta função gerencia as principais tomadas de decisão chamando as funções em na ordem a serm excutadas
+ * para cadastrar uma pessoas.
  * 
  */
 void cadastrarPalestra();
@@ -142,6 +142,13 @@ void exibirPalestra();
  * 
  */
 void alteraDadosPalestra();
+
+/**
+ * @brief Extrai o ano no calendario da maquina
+ * 
+ * @return int retorna o ano
+ */
+int ano();
     
 
 /*
@@ -171,14 +178,6 @@ void alteraDadosPalestra();
     ====================================
 */
 
-
-/* FUNÇÃO DE RETONA O ANO ATUAL NA MAQUINA */
-
-/**
- * @brief Extrai o ano no calendario da maquina
- * 
- * @return int retorna o ano
- */
 int ano()
 {
     time_t data_tempo;
@@ -188,8 +187,6 @@ int ano()
 
     return data->tm_year + 1900;
 }
-
-/* FIM NA FUNÇÃO ANO */
 
 
 
@@ -246,13 +243,10 @@ void cadastrarPalestra()
 
     
 
-}
-
-/* Fim da função cadastrarPalestra */
+}   /* Fim cadastrarPalestra */
 
 
 
-/* Inicio das funções de controle */
 
 void inserirPalestra()
 {    
@@ -268,11 +262,19 @@ void inserirCampus()
 }
 
 
-/* Redebe a data e valida o formato */
-
 void inserirData()
 {    
     LIMPA_TERM
+
+        /*
+            Evita aparecer lixo quando mostrar a exibir a palestra
+        */
+        palestra[numPalestra].dia = 0;
+        palestra[numPalestra].mes = 0;
+        palestra[numPalestra].ano = 0;
+        palestra[numPalestra].hora = 0;
+        palestra[numPalestra].min = 0;
+
 
         exibirPalestra();
         printf("\n");
@@ -405,13 +407,6 @@ void inserirData()
 
 
 
-
-
-
-
-
-/* Esta função serve para mostrar na tela os dados a grava-los */
-
 void exibirPalestra()
 {
 
@@ -422,11 +417,9 @@ void exibirPalestra()
 
 }        
 
-/* Fim da função exibir */
 
 
 
-/* Apresenta o menu para a alteração dos dados inseridos */
 
 void alteraDadosPalestra()
 { 
@@ -469,13 +462,20 @@ void alteraDadosPalestra()
 
 }
 
-/* Fim da função alteraDados */
+/*
+    =================================
+    $ FUNCAO_FIM_CADASTRAR_PALESTRA $
+    =================================
+*/
 
 
 
 
-
-
+/*
+    ======================================
+    $ FUNCAO_INICIO_PESQUISA_DE_PALESTRA $
+    ======================================
+*/
 
 void mostarTodasAsPalestras()
 {
@@ -495,52 +495,68 @@ void mostarTodasAsPalestras()
         
     }
 
-    printf("\nDigite o numero da palestra para ver os detalhes : ");
+}
 
-    int opc;
-    scanf("%d%*c", &opc);
-    fflush(stdin);
 
-    numPalestra = opc - 1;
+void pesquisarPalestra()
+{
 
-    exibirPalestra();
-
-    printf("\n\nDeseja confirmar  ? ( S / N ) : ");
-
-    char opc2;
-    opc2 = getchar();
-    fflush(stdin);
-
-    switch(opc2)
+    if(palestra[0].dia == 0)
     {
-        case 's':
-        case 'S':
+        printf("Nenhuma palestra esta cadastrada");
+    }
+    else
+    {
 
-            printf("Função ainda não produzida!");
-            getchar();
-            getchar();
-        return;
+        mostarTodasAsPalestras();
 
-        case 'n':
-        case 'N':
-            printf("Função ainda não produzida!");
-            getchar();
-            getchar();
-        break;
+        printf("\nDigite o numero da palestra para ver os detalhes : ");
 
-        default:
-            printf("Opcão invalida!");
-        break;
+        int opc;
+        scanf("%d%*c", &opc);
+        fflush(stdin);
+
+        numPalestra = opc - 1;
+
+        exibirPalestra();
+
+        printf("\n\nDeseja confirmar  ? ( S / N ) : ");
+
+        char opc2;
+        opc2 = getchar();
+        fflush(stdin);
+
+        switch(opc2)
+        {
+            case 's':
+            case 'S':
+
+                printf("Função ainda não produzida!");
+                getchar();
+                getchar();
+            return;
+
+            case 'n':
+            case 'N':
+                printf("Função ainda não produzida!");
+                getchar();
+                getchar();
+            break;
+
+            default:
+                printf("Opcão invalida!");
+            break;
+        }
     }
 }
 
 
-/*
-    ====================================
-    $ FUNCAO_INICIO_CADASTRAR_PALESTRA $
-    ====================================
-*/
 
+/*
+    ======================================
+    $ FUNCAO_FIM_PESQUISA_DE_PALESTRA $
+    ======================================
+*/
 
 
 
@@ -640,7 +656,7 @@ void main()
             break;
 
             case 9:
-                mostarTodasAsPalestras();
+                pesquisarPalestra();
             break;
 
             default:
