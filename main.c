@@ -263,7 +263,21 @@ void alteraDadosPessoa();
 
 /*
     ========================================
-    $ PROTOTIPOS_INICIO_CADSATRAR_PESSOA $
+    $ PROTOTIPOS_FIM_CADSATRAR_PESSOA $
+    ========================================
+*/
+/*
+    ========================================
+    $ PROTOTIPOS_INICIO_MENUS $
+    ========================================
+*/
+
+void menuInicial();
+void menuCadastrar();
+
+/*
+    ========================================
+    $ PROTOTIPOS_INICIO_MENUS $
     ========================================
 */
 /*
@@ -1002,6 +1016,167 @@ void pesquisarPessoa()
     $ FUNCAO_FIM_PESQUISA_DE_PESSOA $
     ======================================
 */
+/*
+    ======================================
+    $ FUNCAO_INICIO_MENUS $
+    ======================================
+*/
+
+/*
+    Menu Cadastro - (Trello - Atividade 002 : https://trello.com/c/TMGlx26w)
+*/
+void menuCadastrar()
+{
+    //Varivaveis locais
+    int opc;
+
+    do
+    {
+        LIMPA_TERM
+        printf("\n------------------------------");
+        printf("\n MENU CADASTRAR ");
+        printf("\n (1) >>> Cadastrar Pessoa");
+        printf("\n (2) >>> Cadastrar Palestra");
+        printf("\n (0) <<< Voltar");
+
+        printf("\n\n Escolha uma opação : ");
+        scanf("%d", &opc);
+
+        switch (opc)
+        {
+        case 1:
+            cadastrarPessoa();
+            break;
+
+        case 2:
+            printf("Função ainda não produzida!");
+            //Caminho para Pesquisar
+            break;
+
+        case 0:
+            return;
+            break;
+
+        default:
+            printf("Opção invalida !");
+            break;
+        }
+
+    } while (opc != 0);
+}
+
+
+/*
+    Menu Inicial - (Trello - Atividade 002 : https://trello.com/c/TMGlx26w)
+*/
+void menuInicial()
+{
+    int opc;
+
+    do
+    {
+        LIMPA_TERM
+        printf("\n------------------------------");
+        printf("\n MENU INICIAL \n");
+        printf("\n (1) >>> Cadastrar");
+        printf("\n (2) >>> Pesquisar");
+        printf("\n (3) >>> Sorteio");
+        printf("\n (4) >>> E-mail");
+        printf("\n (0) <<< Sair");
+
+        printf("\n\n Escolha uma opação : ");
+        scanf("%d", &opc);
+
+        switch (opc)
+        {
+        case 1:
+            menuCadastrar();
+            break;
+
+        case 2:
+            printf("Função ainda não produzida!");
+            //Caminho Menu Palestra;
+            break;
+
+        case 3:
+            printf("Função ainda não produzida!");
+            //Caminho Menu Sorteio
+            break;
+
+        case 4:
+            printf("Função ainda não produzida!");
+            //Caminho Menu E-mail
+            break;
+
+        case 0:
+            return;
+            //exit(1);
+            break;
+
+        default:
+            printf("Opação invalida !");
+            break;
+        }
+
+    } while (opc != 0);
+}
+
+
+
+
+
+
+// void menuPalestra()
+// {
+//     int opc;
+
+//     do
+//     {
+//         LIMPA_TERM
+//         printf("------------------------------");
+//         printf("\n\tMENU PALESTRA ");
+//         printf("\n(1) >>> Cadastrar Palestra");
+//         printf("\n(2) >>> Pesquisar Palestra");
+
+//         printf("\n\n(0) <<< Voltar\n\n");
+
+//         printf("Opção: ");
+//         scanf("%d%*c", &opc);
+//         fflush(stdin);
+
+//         switch (opc)
+//         {
+//         case 1:
+//             cadastrarPalestra();
+//             break;
+
+//         case 2:
+//             //Caminho Menu Palestra;
+//             break;
+
+//         case 0:
+//             return;
+
+//         default:
+//             printf("\n\n\t Valor invalido !");
+//             break;
+//         }
+
+//         printf("\n\n");
+
+//     } while (1);
+// }
+
+
+/*
+    ======================================
+    $ FUNCAO_FIM_MENUS $
+    ======================================
+*/
+
+
+
+
 
 
 /*
@@ -1086,8 +1261,11 @@ void main()
     {   
         LIMPA_TERM
         printf("\n\n");
-        printf("1 - Testar Cadastrar Palestra\n");
-        printf("2 - Testar Cadastrar Pessoa\n");
+        
+        printf("1 - Cadastrar Palestra\n");
+        printf("2 - Cadastrar Pessoa\n\n");
+
+        printf("3 - Menu Inicial\n");
 
         printf("\n\n");
         printf("Funçoes de Teste");
@@ -1096,8 +1274,8 @@ void main()
         printf("7  - Popular Banco de Dados de Pessoas\n");
         printf("8  - Popular Banco de Dados de Palestras\n");
         printf("\n");
-        printf("9  - Testar Banco de Dados Passoas\n");
-        printf("10 - Testar Banco de Dados Palestra\n");
+        printf("9  - Testar/Visualizar Banco de Dados Passoas\n");
+        printf("10 - Testar/Vizualizar Banco de Dados Palestra\n");
         
         
         // printf("3 - Testar Menu Cadstro\n\n");
@@ -1118,7 +1296,7 @@ void main()
             break;
                 
             case 3:
-                //menuPalestra();
+                menuInicial();
             break;
 
             case 7:
