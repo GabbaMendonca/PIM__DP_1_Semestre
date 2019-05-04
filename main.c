@@ -267,6 +267,33 @@ void alteraDadosPessoa();
     $ PROTOTIPOS_FIM_CADSATRAR_PESSOA $
     ========================================
 */
+
+/*
+    ========================================
+    $ PROTOTIPOS_FIM_PESQUISA_DE_PESSOA $
+    ========================================
+*/
+void mostarTodasAsPessoas();
+void exibirTodasAsPessoasCadastradas();
+void pesquisarPorCPF();
+void pesquisarPorID();
+void pesquisarPessoa();
+/*
+    ========================================
+    $ PROTOTIPOS_FIM_PESQUISA_DE_PESSOA $
+    ========================================
+*/
+/*
+    ========================================
+    $ PROTOTIPOS_INICIO_EDITAR_CADASTRO $
+    ========================================
+*/
+void editarCadastro();
+/*
+    ========================================
+    $ PROTOTIPOS_FIM_EDITAR_CADASTRO $
+    ========================================
+*/
 /*
     ========================================
     $ PROTOTIPOS_INICIO_MENUS $
@@ -942,6 +969,8 @@ void pesquisarPalestra()
     ======================================
 */
 
+//(Trello - Atividade 006) : https://trello.com/c/z2Bv6kdl
+
 void mostarTodasAsPessoas()
 {
 
@@ -1024,15 +1053,11 @@ void pesquisarPorCPF()
         if(CPF == pessoa[i].cpf)
         {
             exibirPessoa(i);
-            getchar();
-            getchar();
             return;
         }
     }
 
     printf("Não encontrei !");
-    getchar();
-    getchar();
     return;
 }
 
@@ -1046,9 +1071,6 @@ void pesquisarPorID()
     scanf("%d%*c", &ID);
 
     exibirPessoa(ID);
-
-    getchar();
-    getchar();
 }
 
 
@@ -1060,7 +1082,7 @@ void pesquisarPessoa()
     printf("3 >>> Exibir todas as pessoas cadastradas\n");
     printf("0 <<< Voltar\n\n");
     
-    printf("Digite uma opção :");
+    printf("Digite uma opção : ");
 
     int opc;
     scanf("%d%*c", &opc);
@@ -1086,10 +1108,39 @@ void pesquisarPessoa()
             printf("Opção Invalida !!!");
         break;
     }
+
+    printf("\n");
+    printf("(1) >>> Editar Cadastro\n");
+    printf("(2) >>> Excluir Cadastro\n");
+    printf("(3) >>> Reservar um Assento\n");
+    printf("(0) <<< Voltar\n\n");
+
+    printf("Digite uma opção : ");
+    scanf("%d%*c", &opc);
+
+    switch(opc)
+    {
+        case 1:
+            editarCadastro();
+        break;
+            
+        case 2:
+            
+        break;
+            
+        case 3:
+            
+        break;
+
+        case 0:
+            return;
+
+        default:
+            printf("Opção Invalida !!!");
+        break;
+    }
+
 }
-
-
-
 
 /*
     ======================================
@@ -1097,8 +1148,22 @@ void pesquisarPessoa()
     ======================================
 */
 
+/*
+    =================================
+    $ FUNCAO_INICIO_EDITAR_CADASTRO $
+    =================================
+*/
 
+void editarCadastro()
+{
+    alteraDadosPessoa();
+}
 
+/*
+    =================================
+    $ FUNCAO_INICIO_EDITAR_CADASTRO $
+    =================================
+*/
 
 
 
@@ -1208,52 +1273,6 @@ void menuInicial()
 }
 
 
-
-
-
-
-// void menuPalestra()
-// {
-//     int opc;
-
-//     do
-//     {
-//         LIMPA_TERM
-//         printf("------------------------------");
-//         printf("\n\tMENU PALESTRA ");
-//         printf("\n(1) >>> Cadastrar Palestra");
-//         printf("\n(2) >>> Pesquisar Palestra");
-
-//         printf("\n\n(0) <<< Voltar\n\n");
-
-//         printf("Opção: ");
-//         scanf("%d%*c", &opc);
-//         fflush(stdin);
-
-//         switch (opc)
-//         {
-//         case 1:
-//             cadastrarPalestra();
-//             break;
-
-//         case 2:
-//             //Caminho Menu Palestra;
-//             break;
-
-//         case 0:
-//             return;
-
-//         default:
-//             printf("\n\n\t Valor invalido !");
-//             break;
-//         }
-
-//         printf("\n\n");
-
-//     } while (1);
-// }
-
-
 /*
     ======================================
     $ FUNCAO_FIM_MENUS $
@@ -1354,6 +1373,7 @@ void main()
         printf("3 - Cadastrar Palestra\n\n");
         
         printf("4 - Pesquisar Pesssoa\n");
+        printf("5 - Editar Cadastro\n");
 
         printf("\n\n");
         printf("Funçoes de Teste");
