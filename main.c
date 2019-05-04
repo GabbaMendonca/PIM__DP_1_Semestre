@@ -303,6 +303,9 @@ void editarCadastro();
 void menuInicial();
 void menuCadastrar();
 
+void menu4();
+void menuPesquisarPessoa();
+
 /*
     ========================================
     $ PROTOTIPOS_INICIO_MENUS $
@@ -1065,7 +1068,7 @@ void pesquisarPorCPF()
 void pesquisarPorID()
 {
     LIMPA_TERM
-    printf("Digite um ID :");
+    printf("Digite um ID : ");
 
     int ID;
     scanf("%d%*c", &ID);
@@ -1075,71 +1078,10 @@ void pesquisarPorID()
 
 
 void pesquisarPessoa()
-{
-    LIMPA_TERM
-    printf("1 >>> Pesquisar por ID\n");
-    printf("2 >>> Pesquisar por CPF\n");
-    printf("3 >>> Exibir todas as pessoas cadastradas\n");
-    printf("0 <<< Voltar\n\n");
-    
-    printf("Digite uma opção : ");
+{   
+    menuPesquisarPessoa();
 
-    int opc;
-    scanf("%d%*c", &opc);
-
-    switch(opc)
-    {
-        case 1:
-            pesquisarPorID();
-        break;
-            
-        case 2:
-            pesquisarPorCPF();
-        break;
-            
-        case 3:
-            exibirTodasAsPessoasCadastradas();
-        break;
-
-        case 0:
-            return;
-
-        default:
-            printf("Opção Invalida !!!");
-        break;
-    }
-
-    printf("\n");
-    printf("(1) >>> Editar Cadastro\n");
-    printf("(2) >>> Excluir Cadastro\n");
-    printf("(3) >>> Reservar um Assento\n");
-    printf("(0) <<< Voltar\n\n");
-
-    printf("Digite uma opção : ");
-    scanf("%d%*c", &opc);
-
-    switch(opc)
-    {
-        case 1:
-            editarCadastro();
-        break;
-            
-        case 2:
-            
-        break;
-            
-        case 3:
-            
-        break;
-
-        case 0:
-            return;
-
-        default:
-            printf("Opção Invalida !!!");
-        break;
-    }
-
+    menu4();
 }
 
 /*
@@ -1173,8 +1115,148 @@ void editarCadastro()
     ======================================
 */
 
+
+
+// MENU 4 - (Trello - Atividade 007) : https://trello.com/c/cX8Maj2L
+void menu4()
+{
+    do
+    {
+        printf("\n------------------------------");
+        printf("\n (1) >>> Editar Cadastro");
+        printf("\n (2) >>> Excluir Cadastro");
+        printf("\n (3) >>> Reservar um Assento");
+        printf("\n (0) <<< Voltar\n\n");
+
+        printf("Digite uma opção : ");
+
+        int opc;
+        scanf("%d%*c", &opc);
+
+        switch(opc)
+        {
+            case 1:
+                editarCadastro();
+            break;
+                
+            case 2:
+                
+            break;
+                
+            case 3:
+                
+            break;
+
+            case 0:
+                return;
+
+            default:
+                printf("Opção Invalida !!!");
+            break;
+        }
+    }
+    while(1);
+}
+
+
+// Pesquisar Pessoa - (Trello - Atividade 006) : https://trello.com/c/z2Bv6kdl
+void menuPesquisarPessoa()
+{   
+    do
+    {   
+        LIMPA_TERM
+        printf("\n------------------------------");
+        printf("\n MENU 2.1 \n");
+        printf("\n (1) >>> Pesquisar por ID");
+        printf("\n (2) >>> Pesquisar por CPF");
+        printf("\n (3) >>> Exibir todas as pessoas cadastradas");
+        printf("\n (0) <<< Voltar\n\n");
+        
+        printf("Digite uma opção : ");
+
+        int opc;
+        scanf("%d%*c", &opc);
+
+        switch(opc)
+        {
+            case 1:
+                pesquisarPorID();
+            return;
+                
+            case 2:
+                pesquisarPorCPF();
+            return;
+                
+            case 3:
+                exibirTodasAsPessoasCadastradas();
+            return;
+
+            case 0:
+                return;
+
+            default:
+                printf("Opção Invalida !!!");
+            break;
+        }
+    }
+    while(1);
+}
+
+
+// MENU 03 - Pesquisar (Trello - Atividade 005) : https://trello.com/c/2hHh8WCf
+void menuPesquisar()
+{
+    int opc;
+
+    do
+    {
+        LIMPA_TERM
+        printf("\n------------------------------");
+        printf("\n MENU 2 PESQUISAR \n");
+        printf("\n (1) >>> Pesquisar Pessoa");
+        printf("\n (2) >>> Pesquisar Palestra");
+        printf("\n (3) >>> Pesquisar Ticket");
+        printf("\n (0) <<< Sair");
+
+        printf("\n\n Escolha uma opação : ");
+        scanf("%d", &opc);
+
+        switch (opc)
+        {
+        case 1:
+            pesquisarPessoa();
+            break;
+
+        case 2:
+            pesquisarPalestra();
+            break;
+
+        case 3:
+            printf("Função ainda não produzida!");
+            //Caminho Menu Sorteio
+            break;
+
+        case 4:
+            printf("Função ainda não produzida!");
+            //Caminho Menu E-mail
+            break;
+
+        case 0:
+            return;
+            //exit(1);
+            break;
+
+        default:
+            printf("Opação invalida !");
+            break;
+        }
+
+    } while (opc != 0);
+}
+
+
 /*
-    Menu Cadastro - (Trello - Atividade 002 : https://trello.com/c/TMGlx26w)
+    Menu Cadastar - (Trello - Atividade 002 : https://trello.com/c/TMGlx26w)
 */
 void menuCadastrar()
 {
@@ -1185,7 +1267,7 @@ void menuCadastrar()
     {
         LIMPA_TERM
         printf("\n------------------------------");
-        printf("\n MENU CADASTRAR ");
+        printf("\n MENU 1 CADASTRAR ");
         printf("\n (1) >>> Cadastrar Pessoa");
         printf("\n (2) >>> Cadastrar Palestra");
         printf("\n (0) <<< Voltar");
@@ -1209,7 +1291,7 @@ void menuCadastrar()
             break;
 
         default:
-            printf("Opção invalida !");
+            printf("Opção invalida !!!");
             break;
         }
 
@@ -1245,8 +1327,7 @@ void menuInicial()
             break;
 
         case 2:
-            printf("Função ainda não produzida!");
-            //Caminho Menu Palestra;
+            menuPesquisar();
             break;
 
         case 3:
