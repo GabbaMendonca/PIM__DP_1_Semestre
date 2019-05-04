@@ -248,10 +248,11 @@ void inserirIdade();
 void inserirEmail();
 
 /**
- * @brief Apenas exibe o cadastro de acordo com o valor na variavel numCadastro
+ * @brief Apenas exibe o cadastro de um pessoa
  * 
+ * @param numDoCadastro Recebe o ID do cadasatro a ser buscado para exibição
  */
-void exibirPessoa();
+void exibirPessoa(int numDoCadastro);
 
 /**
  * @brief Contem a rotina de alterar dados caso ja cadastrados no sistema caso seja preciso.
@@ -653,7 +654,7 @@ void cadastrarPessoa()
     do
     {
         LIMPA_TERM
-        exibirPessoa();
+        exibirPessoa(contadorDeCadastros);
         
         printf("\n\nDados estão corretos ? ( S / N ) : ");
 
@@ -704,22 +705,22 @@ void Pessoa(int categoria)
     pessoa[numCadastro].categoria = categoria;
 
     LIMPA_TERM
-    exibirPessoa();
+    exibirPessoa(contadorDeCadastros);
     printf("\n\n");
     inserirCpf();
 
     LIMPA_TERM
-    exibirPessoa();
+    exibirPessoa(contadorDeCadastros);
     printf("\n\n");
     inserirNome();
 
     LIMPA_TERM
-    exibirPessoa();
+    exibirPessoa(contadorDeCadastros);
     printf("\n\n");
     inserirIdade();
 
     LIMPA_TERM
-    exibirPessoa();
+    exibirPessoa(contadorDeCadastros);
     printf("\n\n");
     inserirEmail();
 
@@ -764,8 +765,10 @@ void inserirEmail()
 
 
 
-void exibirPessoa()
-{
+void exibirPessoa(int numDoCadastro)
+{   
+
+    numCadastro = numDoCadastro - 1;
 
     char categoria[16];
     
@@ -959,16 +962,15 @@ void mostarTodasAsPessoas()
 
 }
 
-void pesquisarPessoa()
-{
 
+void exibirTodasAsPessoasCadastradas()
+{
     if(pessoa[0].cpf == 0)
     {
         printf("Nenhum usuario esta cadastrado");
     }
     else
     {
-
         mostarTodasAsPessoas();
 
         printf("\nDigite o ID da pessoa para ver os detalhes : ");
@@ -977,9 +979,7 @@ void pesquisarPessoa()
         scanf("%d%*c", &opc);
         fflush(stdin);
 
-        numCadastro = opc - 1;
-
-        exibirPessoa();
+        exibirPessoa(opc);
 
         printf("\n\nDeseja confirmar  ? ( S / N ) : ");
 
@@ -1011,11 +1011,97 @@ void pesquisarPessoa()
     }
 }
 
+
+void pesquisarPorCPF()
+{
+    printf("Digite um CPF :");
+
+    long CPF;
+    scanf("%ld%*c", &CPF);
+
+    for(int i = 0; i <= contadorDeCadastros ;i++)
+    {
+        if(CPF == pessoa[i].cpf)
+        {
+            exibirPessoa(i);
+            getchar();
+            getchar();
+            return;
+        }
+    }
+
+    printf("Não encontrei !");
+    getchar();
+    getchar();
+    return;
+}
+
+
+void pesquisarPorID()
+{
+    LIMPA_TERM
+    printf("Digite um ID :");
+
+    int ID;
+    scanf("%d%*c", &ID);
+
+    exibirPessoa(ID);
+
+    getchar();
+    getchar();
+}
+
+
+void pesquisarPessoa()
+{
+    LIMPA_TERM
+    printf("1 >>> Pesquisar por ID\n");
+    printf("2 >>> Pesquisar por CPF\n");
+    printf("3 >>> Exibir todas as pessoas cadastradas\n");
+    printf("0 <<< Voltar\n\n");
+    
+    printf("Digite uma opção :");
+
+    int opc;
+    scanf("%d%*c", &opc);
+
+    switch(opc)
+    {
+        case 1:
+            pesquisarPorID();
+        break;
+            
+        case 2:
+            pesquisarPorCPF();
+        break;
+            
+        case 3:
+            exibirTodasAsPessoasCadastradas();
+        break;
+
+        case 0:
+            return;
+
+        default:
+            printf("Opção Invalida !!!");
+        break;
+    }
+}
+
+
+
+
 /*
     ======================================
     $ FUNCAO_FIM_PESQUISA_DE_PESSOA $
     ======================================
 */
+
+
+
+
+
+
 /*
     ======================================
     $ FUNCAO_INICIO_MENUS $
@@ -1262,20 +1348,21 @@ void main()
         LIMPA_TERM
         printf("\n\n");
         
-        printf("1 - Cadastrar Palestra\n");
-        printf("2 - Cadastrar Pessoa\n\n");
+        printf("1 - Menu Inicial\n\n");
 
-        printf("3 - Menu Inicial\n");
+        printf("2 - Cadastrar Pessoa\n");
+        printf("3 - Cadastrar Palestra\n\n");
+        
+        printf("4 - Pesquisar Pesssoa\n");
 
         printf("\n\n");
         printf("Funçoes de Teste");
         printf("\n");
 
-        printf("7  - Popular Banco de Dados de Pessoas\n");
-        printf("8  - Popular Banco de Dados de Palestras\n");
+        printf("10  - Popular Banco de Dados de Pessoas\n");
+        printf("11  - Popular Banco de Dados de Palestras\n");
         printf("\n");
-        printf("9  - Testar/Visualizar Banco de Dados Passoas\n");
-        printf("10 - Testar/Vizualizar Banco de Dados Palestra\n");
+        printf("20 - Testar/Vizualizar Banco de Dados Palestra\n");
         
         
         // printf("3 - Testar Menu Cadstro\n\n");
@@ -1288,7 +1375,7 @@ void main()
         switch(opc)
         {
             case 1:
-                cadastrarPalestra();
+                menuInicial();
             break;
                 
             case 2:
@@ -1296,22 +1383,22 @@ void main()
             break;
                 
             case 3:
-                menuInicial();
+                cadastrarPalestra();
             break;
 
-            case 7:
-                teste_de_pessoa();
-            break;
-
-            case 8:
-                teste_de_palestra();
-            break;
-
-            case 9:
+            case 4:
                 pesquisarPessoa();
             break;
 
             case 10:
+                teste_de_pessoa();
+            break;
+
+            case 11:
+                teste_de_palestra();
+            break;
+
+            case 20:
                 pesquisarPalestra();
             break;
 
