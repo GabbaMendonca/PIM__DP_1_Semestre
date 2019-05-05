@@ -187,10 +187,11 @@ void inserirCampus();
 void inserirData();
 
 /**
- * @brief Apenas exibe os dados da palestra de acordo com o valor na veriavel numPalestra
+ * @brief Apenas exibe os dados de uma palestra
  * 
+ * @param numDaPalestra  Recebe o ID da palestra a ser ixibida
  */
-void exibirPalestra();
+void exibirPalestra(int numDaPalestra);
 
 
 /**
@@ -248,7 +249,7 @@ void inserirIdade();
 void inserirEmail();
 
 /**
- * @brief Apenas exibe o cadastro de um pessoa
+ * @brief Apenas exibe o cadastro de uma pessoa
  * 
  * @param numDoCadastro Recebe o ID do cadasatro a ser buscado para exibição
  */
@@ -328,9 +329,10 @@ void menuPesquisarPessoa();
     FUNÇÕES
     =======
 */
+
 /*
     ====================================
-    $ FUNCAO_INICIO_CADASTRAR_PALESTRA $
+    $ FUNCAO_INICIO_TEMPO $
     ====================================
 */
 
@@ -344,8 +346,19 @@ int ano()
     return data->tm_year + 1900;
 }
 
+/*
+    ====================================
+    $ FUNCAO_FIM_TEMPO $
+    ====================================
+*/
 
 
+
+/*
+    ====================================
+    $ FUNCAO_INICIO_CADASTRAR_PALESTRA $
+    ====================================
+*/
 
 void cadastrarPalestra()
 {
@@ -365,7 +378,7 @@ void cadastrarPalestra()
     do
     {
         LIMPA_TERM
-        exibirPalestra();
+        exibirPalestra(contadorDePalestra);
         
         printf("\n\nDados estão corretos ? ( S / N ) : ");
 
@@ -432,7 +445,7 @@ void inserirData()
         palestra[numPalestra].min = 0;
 
 
-        exibirPalestra();
+        exibirPalestra(contadorDePalestra);
         printf("\n");
 
         printf("Data \n\n");
@@ -457,7 +470,7 @@ void inserirData()
         }
         while(1);
 
-        exibirPalestra();
+        exibirPalestra(contadorDePalestra);
         printf("\n");
 
         printf("Data \n\n");
@@ -482,7 +495,7 @@ void inserirData()
         }
         while(1);
 
-        exibirPalestra();
+        exibirPalestra(contadorDePalestra);
         printf("\n");
 
         printf("Data \n\n");
@@ -506,7 +519,7 @@ void inserirData()
         }
         while(1);
 
-        exibirPalestra();
+        exibirPalestra(contadorDePalestra);
         printf("\n");
 
         printf("Horario \n\n");
@@ -531,7 +544,7 @@ void inserirData()
         }
         while(1);
 
-        exibirPalestra();
+        exibirPalestra(contadorDePalestra);
         printf("\n");
 
         printf("Horario \n\n");
@@ -556,15 +569,17 @@ void inserirData()
         }
         while(1);
 
-        exibirPalestra();
+        exibirPalestra(contadorDePalestra);
         printf("\n");
 }
 
 
 
 
-void exibirPalestra()
+void exibirPalestra(int numDaPalestra)
 {
+
+    numPalestra = numDaPalestra - 1;
 
     LIMPA_TERM
     printf("Nome da Paletra ... : %s\n", palestra[numPalestra].nomePalestra);
@@ -907,9 +922,23 @@ void mostarTodasAsPalestras()
 }
 
 
+void validarPalestra()
+{
+    if (palestra[numPalestra].ano < ano())
+    {
+        printf("\n");
+        printf("\n ALERTA !!!");
+        printf("\n Pelestra ja foi ministrada !!!");
+
+        printf("\n\n Pressione enter para escolher outra palestra ...");
+        getchar();
+        pesquisarPalestra();
+    }
+}
+
 void pesquisarPalestra()
 {
-
+    LIMPA_TERM
     if(palestra[0].dia == 0)
     {
         printf("Nenhuma palestra esta cadastrada");
@@ -925,9 +954,9 @@ void pesquisarPalestra()
         scanf("%d%*c", &opc);
         fflush(stdin);
 
-        numPalestra = opc - 1;
+        exibirPalestra(opc);
 
-        exibirPalestra();
+        validarPalestra();
 
         printf("\n\nDeseja confirmar  ? ( S / N ) : ");
 
@@ -1115,8 +1144,6 @@ void editarCadastro()
     ======================================
 */
 
-
-
 // MENU 4 - (Trello - Atividade 007) : https://trello.com/c/cX8Maj2L
 void menu4()
 {
@@ -1282,8 +1309,7 @@ void menuCadastrar()
             break;
 
         case 2:
-            printf("Função ainda não produzida!");
-            //Caminho para Pesquisar
+            cadastrarPalestra();
             break;
 
         case 0:
@@ -1390,7 +1416,7 @@ void teste_de_palestra()
         strcpy(palestra[j].campus, "UNIP");
         palestra[j].dia = 11 + j;
         palestra[j].mes = 1 + j;
-        palestra[j].ano = 2021 + j;
+        palestra[j].ano = 2018 + j;
 
         palestra[j].hora = 11 + j;
         palestra[j].min = 21 + j;
