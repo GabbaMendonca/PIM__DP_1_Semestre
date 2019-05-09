@@ -72,7 +72,9 @@ struct PALESTRA
     
     int hora;
     int min;
-    
+
+    int qtdMaxLugares;
+    int lugaresOcupados;
 };
 
 struct PALESTRA palestra[VETOR];
@@ -81,7 +83,7 @@ struct PALESTRA palestra[VETOR];
  * @brief Registra a quantidade total de cadstro
  * 
  */
-int contadorDePalestra = 0;
+int contadorDePalestra = 1;
 
 /**
  * @brief Recebe o valor a ser acessdo na scruct
@@ -131,7 +133,7 @@ struct PESSOA pessoa[VETOR];
  * @brief Registra a quantidade total de cadstro
  * 
  */
-int contadorDeCadastros = 0;
+int contadorDeCadastros = 1;
 
 /**
  * @brief Recebe o valor a ser acessdo na scruct
@@ -295,6 +297,22 @@ void editarCadastro();
     $ PROTOTIPOS_FIM_EDITAR_CADASTRO $
     ========================================
 */
+
+/*
+    ========================================
+    $ PROTOTIPOS_INICIO_PESQUISAR_PALESTRA $
+    ========================================
+*/
+
+void validarPalestra();
+void pesquisarPalestra();
+void menuPesquisar();
+/*
+    ========================================
+    $ PROTOTIPOS_FIM__PESQUISAR_PALESTRA $
+    ========================================
+*/
+
 /*
     ========================================
     $ PROTOTIPOS_INICIO_MENUS $
@@ -306,6 +324,8 @@ void menuCadastrar();
 
 void menu4();
 void menuPesquisarPessoa();
+
+void menu6();
 
 /*
     ========================================
@@ -328,7 +348,8 @@ void menuPesquisarPessoa();
     =======
     FUNÇÕES
     =======
-*/
+*
+s/
 
 /*
     ====================================
@@ -340,6 +361,7 @@ int ano()
 {
     time_t data_tempo;
     time(&data_tempo);
+    
     struct tm *tempo = localtime(&data_tempo);
     struct tm *data = localtime(&data_tempo);
 
@@ -364,8 +386,8 @@ void cadastrarPalestra()
 {
 
     LIMPA_TERM
-    printf("Numero da Palestra : %d\n", (contadorDePalestra + 1));
-    numPalestra = contadorDePalestra;
+    printf("Numero da Palestra : %d\n", (contadorDePalestra));
+    numPalestra = contadorDePalestra - 1;
 
     inserirPalestra();
     inserirCampus();
@@ -505,7 +527,7 @@ void inserirData()
             printf("Digite apenas o Ano : ");
             scanf("%d%*c", &palestra[numPalestra].ano);
 
-                if (palestra[numPalestra].ano > ano() && palestra[numPalestra].ano < (ano() + 10))
+                if (palestra[numPalestra].ano >= ano() && palestra[numPalestra].ano < (ano() + 10))
                 {
                     break;
                 }
@@ -648,8 +670,8 @@ void cadastrarPessoa()
 {
 
     LIMPA_TERM
-    printf("Numero do Cadastro : %d\n\n", (contadorDeCadastros + 1));
-    numCadastro = contadorDeCadastros;
+    printf("Numero do Cadastro : %d\n\n", contadorDeCadastros);
+    numCadastro = contadorDeCadastros - 1;
 
     printf("Você quer cadastrar um ?\n\n");
 
@@ -857,10 +879,11 @@ void alteraDadosPessoa()
 
     printf("\n( 0 ) <<< Voltar\n");
 
-    printf("\nDigite a opcção que deseja alterar ?");
+    printf("\nDigite a opcção que deseja alterar ? : ");
 
     int opc;
     scanf("%d%*c", &opc);
+    printf("\n");
 
     
     switch (opc)
@@ -923,9 +946,52 @@ void mostarTodasAsPalestras()
 
 
 void validarPalestra()
-{
+{   
+
+    time_t data_tempo;
+    time(&data_tempo);
+    
+    struct tm *tempo = localtime(&data_tempo);
+
+    if (palestra[numPalestra].lugaresOcupados >= palestra[numPalestra].qtdMaxLugares)
+    {
+        goto ESGOTADA;
+    }
+
     if (palestra[numPalestra].ano < ano())
     {
+        goto MINISTRADA;
+    }
+    else 
+    {
+        if(palestra[numPalestra].ano == ano())
+        {
+            if(palestra[numPalestra].mes < tempo->tm_mon+1)
+            {
+                goto MINISTRADA;
+            }
+            else
+            { 
+                if(palestra[numPalestra].dia < tempo->tm_mday)
+                {
+                    goto MINISTRADA;
+                }
+                else
+                {
+                    return;
+                }
+            }
+        }
+        else
+        {
+            return;
+        }
+    }
+    
+    
+
+    MINISTRADA:
+    
         printf("\n");
         printf("\n ALERTA !!!");
         printf("\n Pelestra ja foi ministrada !!!");
@@ -933,7 +999,17 @@ void validarPalestra()
         printf("\n\n Pressione enter para escolher outra palestra ...");
         getchar();
         pesquisarPalestra();
-    }
+
+    ESGOTADA:
+
+        printf("\n");
+        printf("\n ALERTA !!!");
+        printf("\n Pelestra esta esgotada !!!");
+
+        printf("\n\n Pressione enter para escolher outra palestra ...");
+        getchar();
+        pesquisarPalestra();
+
 }
 
 void pesquisarPalestra()
@@ -945,14 +1021,20 @@ void pesquisarPalestra()
     }
     else
     {
-
         mostarTodasAsPalestras();
+
+        printf("\n(0) <<< Voltar\n");
 
         printf("\nDigite o numero da palestra para ver os detalhes : ");
 
         int opc;
         scanf("%d%*c", &opc);
         fflush(stdin);
+
+        if (opc == 0)
+        {
+            menuPesquisar();
+        }
 
         exibirPalestra(opc);
 
@@ -969,9 +1051,10 @@ void pesquisarPalestra()
             case 's':
             case 'S':
 
-                printf("Função ainda não produzida!");
-                getchar();
-                getchar();
+                menu6();
+                // printf("Função ainda não produzida!");
+                // getchar();
+                // getchar();
             return;
 
             case 'n':
@@ -1034,11 +1117,18 @@ void exibirTodasAsPessoasCadastradas()
     {
         mostarTodasAsPessoas();
 
+        printf("\n(0) <<< Voltar\n");
+
         printf("\nDigite o ID da pessoa para ver os detalhes : ");
 
         int opc;
         scanf("%d%*c", &opc);
         fflush(stdin);
+
+        if (opc == 0)
+        {
+            menuPesquisarPessoa();
+        }
 
         exibirPessoa(opc);
 
@@ -1080,11 +1170,11 @@ void pesquisarPorCPF()
     long CPF;
     scanf("%ld%*c", &CPF);
 
-    for(int i = 0; i <= contadorDeCadastros ;i++)
+    for(int i = 0; i < contadorDeCadastros ;i++)
     {
         if(CPF == pessoa[i].cpf)
         {
-            exibirPessoa(i);
+            exibirPessoa(i + 1);
             return;
         }
     }
@@ -1144,6 +1234,43 @@ void editarCadastro()
     ======================================
 */
 
+// MENU 6 - (Trello - Atividade 014) : https://trello.com/c/lsOI0ECR
+
+void menu6()
+{
+    do
+    {
+        printf("\n------------------------------");
+        printf("\n (1) >>> Reservar um assento");
+        printf("\n (2) >>> Editar Palestra");
+        printf("\n (0) <<< Voltar\n\n");
+
+        printf("Digite uma opção : ");
+
+        int opc;
+        scanf("%d%*c", &opc);
+
+        switch(opc)
+        {
+            case 1:
+                
+            break;
+                
+            case 2:
+                
+            break;
+
+            case 0:
+                return;
+
+            default:
+                printf("Opção Invalida !!!");
+            break;
+        }
+    }
+    while(1);
+}
+
 // MENU 4 - (Trello - Atividade 007) : https://trello.com/c/cX8Maj2L
 void menu4()
 {
@@ -1164,6 +1291,7 @@ void menu4()
         {
             case 1:
                 editarCadastro();
+                exibirPessoa((numCadastro + 1));
             break;
                 
             case 2:
@@ -1246,7 +1374,7 @@ void menuPesquisar()
         printf("\n (0) <<< Sair");
 
         printf("\n\n Escolha uma opação : ");
-        scanf("%d", &opc);
+        scanf("%d%*c", &opc);
 
         switch (opc)
         {
@@ -1271,7 +1399,7 @@ void menuPesquisar()
         case 0:
             return;
             //exit(1);
-            break;
+            //break;
 
         default:
             printf("Opação invalida !");
@@ -1300,7 +1428,7 @@ void menuCadastrar()
         printf("\n (0) <<< Voltar");
 
         printf("\n\n Escolha uma opação : ");
-        scanf("%d", &opc);
+        scanf("%d%*c", &opc);
 
         switch (opc)
         {
@@ -1344,7 +1472,7 @@ void menuInicial()
         printf("\n (0) <<< Sair");
 
         printf("\n\n Escolha uma opação : ");
-        scanf("%d", &opc);
+        scanf("%d%*c", &opc);
 
         switch (opc)
         {
@@ -1420,6 +1548,9 @@ void teste_de_palestra()
 
         palestra[j].hora = 11 + j;
         palestra[j].min = 21 + j;
+
+        palestra[j].qtdMaxLugares = 5;
+        palestra[j].lugaresOcupados = j + 1;
     }
 
     contadorDePalestra = 9;
