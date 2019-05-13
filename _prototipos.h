@@ -1,8 +1,159 @@
+
+#ifndef __PROTOTIPOS_H_
+#define __PROTOTIPOS_H_
+
+#define VETOR 10
+
+#define MIN 3
+#define MED 50
+#define SIZE 100
+
+/*
+    ========
+    STRUCT'S
+    ========
+*/
+
+
+
+
+/*
+    ====================================
+    $ STRUCT_INICIO_CADASTRAR_PALESTRA $
+    ====================================
+*/
+
+/**
+ * @brief A struct contem os dados das palestras a serem cadsatradas.
+ * Para possibilitar que mais de uma pessoa possa ser cadastrada
+ * foi inserido um vetor de scructs
+ * 
+ *      struct PALESTRA palestra[VETOR];
+ * 
+ * Assim o mesmo criar varios scructs podendo ser acessados atraves do
+ * numero do vetor.
+ * 
+ * Dessa forma cada palestra ganha um numero de cadastro
+ * que posteriormente se torna a posição do vetor.
+ * 
+ */
+struct PALESTRA
+{
+    char nomePalestra[MED];
+    char campus[MED];
+
+    int dia;
+    int mes;
+    int ano;
+    
+    int hora;
+    int min;
+
+    int qtdMaxLugares;
+    int lugaresOcupados;
+};
+
+struct PALESTRA palestra[VETOR];
+
+/**
+ * @brief Registra a quantidade total de cadstro
+ * 
+ */
+int contadorDePalestra;
+
+/**
+ * @brief Recebe o valor a ser acessdo na scruct
+ * 
+ */
+int numPalestra;
+
+/*
+    ===============================
+    $STRUCT_FIM_CADASTRAR_PALESTRA$
+    ===============================
+*/
+
+
+
+
+/*
+    ==================================
+    $ STRUCT_INICIO_CADASTRAR_PESSOA $
+    ==================================
+*/
+
+/**
+ * @brief A struct contem os dados das pessoa a serem cadsatradas.
+ * Para possibilitar que mais de uma pessoa possa ser cadastrada
+ * foi inserido um vetor de scructs
+ * 
+ *      struct PESSOA pessoa[VETOR];
+ * 
+ * Assim o mesmo criar varios scructs podendo ser acessados atraves do
+ * numero do vetor.
+ * 
+ * Dessa forma cada pessoa ganha um numero numero de cadastro
+ * que posteriormente se torna a posição do vetor.
+ * 
+ */
+struct PESSOA 
+{   
+    long  cpf;
+    int  categoria;
+
+    char nome[SIZE];
+    int  idade;
+    char email[SIZE];    
+};
+
+struct PESSOA pessoa[VETOR];
+
+/**
+ * @brief Registra a quantidade total de cadstro
+ * 
+ */
+int contadorDeCadastros;
+
+/**
+ * @brief Recebe o valor a ser acessdo na scruct
+ * 
+ */
+int numCadastro;
+
+/*
+    ===============================
+    $ STRUCT_FIM_CADASTRAR_PESSOA $
+    ===============================
+*/
+
+
+
+
+/*
+    ============
+    FIM STRUCT'S
+    ============
+*/
+
+
+
+
+/* 
+    =======================================================================
+*/
+
+
+
+
 /*
     =============================
     INICIO PROTOTIPOS DAS FUNÇÕES
     =============================
 */
+
+
+
+
 /*
     ========================================
     $ PROTOTIPOS_INICIO_CADASTRAR_PALESTRA $
@@ -176,3 +327,5 @@ void menu6();
     FIM PROTOTIPOS DAS FUNÇÕES
     ==========================
 */
+
+#endif

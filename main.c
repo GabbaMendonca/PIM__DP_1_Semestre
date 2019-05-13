@@ -21,19 +21,6 @@
 #include "_prototipos.h"
 #include "_Terminal.h"
 
-#include "funcoes.c"
-
-
-
-
-
-
-
-
-
-
-
-
 /*
     ======================================
     $ FUNCAO_INICIO_MENUS $
@@ -203,7 +190,7 @@ void menuPesquisar()
             break;
 
         case 0:
-            return;
+            menuInicial();
             //exit(1);
             //break;
 
@@ -406,6 +393,14 @@ void teste_de_pessoa()
 
 void main()
 {
+
+    contadorDePalestra = 1;
+    numPalestra = 0;
+
+    contadorDeCadastros = 1;
+    numCadastro = 0;
+
+
     do
     {   
         LIMPA_TERM
