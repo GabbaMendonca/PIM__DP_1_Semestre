@@ -856,13 +856,6 @@ void pesquisarPorID()
 }
 
 
-void pesquisarPessoa()
-{   
-    menuPesquisarPessoa();
-
-    menu4();
-}
-
 /*
     ======================================
     $ FUNCAO_FIM_PESQUISA_DE_PESSOA $

@@ -17,6 +17,10 @@
 
 
 
+
+
+
+
 /*
     ====================================
     $ STRUCT_INICIO_CADASTRAR_PALESTRA $
@@ -76,6 +80,10 @@ int numPalestra;
 
 
 
+
+
+
+
 /*
     ==================================
     $ STRUCT_INICIO_CADASTRAR_PESSOA $
@@ -125,6 +133,48 @@ int numCadastro;
     $ STRUCT_FIM_CADASTRAR_PESSOA $
     ===============================
 */
+
+
+
+
+
+
+
+
+/*
+    ===============================
+    $ STRUCT_INICIO_TEATRO $
+    ===============================
+*/
+
+/**
+ * @brief Aqui estão armazenados todos os dados referente a maitriz de assentos
+ * 
+ * Em **matriz esta o ponteiro da matriz dinamica
+ * 
+ */
+struct DADOS_MATRIZ
+{   
+    int **matriz;
+    int capacidade;
+    int filas, colunas;
+    int qtdLugaresDef, qtdDefDiponivel;
+    int porcentagemDeLugaresDef;
+};
+
+struct DADOS_MATRIZ teatro[VETOR];
+
+int numMatriz;
+
+/*
+    ===============================
+    $ STRUCT_FIM_TEATRO $
+    ===============================
+*/
+
+
+
+
 
 
 
@@ -302,6 +352,94 @@ void menuPesquisar();
     $ PROTOTIPOS_FIM__PESQUISAR_PALESTRA $
     ========================================
 */
+
+
+
+
+
+/**
+ * @brief 
+ * 
+ * A função aloca na memoria uma matriz dinamica
+ * com numero de filas+1 e colunas+1 para o auditorio
+ * e retorna uma ponteiro de matriz (m.matriz[][]).
+ * 
+ * 
+ * 
+ * A MATRIZ :
+ * 
+ * A matriz foi alocada de maneira dinamica na memoria, porem,
+ * seus dados quantidade de lugares, filas, colunas, assim como,
+ * o ponteiro que refenrencia sua posição na memoria
+ * estão gurdados em uma struct no arquivo _matriz.h junto com os prototipos
+ * da função assim possuindo acesso global dos dados.
+ * 
+ * 
+ * 
+ * A ALOCAÇÃO DA MEMORIA :
+ *  
+ * A coluna 0 serve para identificar as filas por letra,
+ * sera carregado o valor de 65 a 90 equivalente A ate Z maiusculas
+ * na tabela ASCII.
+ *
+ * 
+ * A fila 0 sera usada para carregar os numeros (1,2,3,4 ... n) para identificar as colunas.
+ * 
+ * 
+ * Desta maneira a gerando a idetificação dos lugares da forma :
+ * 
+ *      - Coluna A
+ *      - Fila 1
+ * 
+ * ou seja, o assento a ser reservado sera o A1.
+ * 
+ *               Coluna 1 | Coluna 2 |
+ *      Fila A |          |          |
+ *      Fila B |          |          |
+ * 
+ */
+
+void criarMatriz();
+
+void matriz();
+
+
+
+/**
+ * @brief Mostra a matriz criada na tela do usuario
+ * 
+ */
+void mostrarMatriz();
+
+
+
+
+/**
+ * @brief Calcula a porcentagem de deficientes
+ * 
+ */
+void calculaDeficientes();
+
+
+
+/**
+ * @brief 
+ * 
+ * @param categoria 
+ */
+void inserirDadosMatriz(int categoria);
+
+
+void reservarLugar();
+
+
+int assentos(int **matrizAssentos, char fila, int coluna, int categoria);
+
+
+
+
+
+
 
 /*
     ========================================

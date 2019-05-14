@@ -92,7 +92,7 @@ void menu4()
             break;
                 
             case 3:
-                
+                mostrarMatriz();
             break;
 
             case 0:
@@ -150,6 +150,12 @@ void menuPesquisarPessoa()
     while(1);
 }
 
+void pesquisarPessoa()
+{   
+    menuPesquisarPessoa();
+
+    menu4();
+}
 
 // MENU 03 - Pesquisar (Trello - Atividade 005) : https://trello.com/c/2hHh8WCf
 void menuPesquisar()
@@ -375,6 +381,15 @@ void teste_de_pessoa()
 
     contadorDeCadastros = 9;
 }
+
+void alocar_teatro()
+{
+    teatro[numMatriz].filas = 10;
+    teatro[numMatriz].colunas = 10;
+
+    matriz();
+}
+
 /*
     ============
     $$ TESTES $$
@@ -400,6 +415,8 @@ void main()
     contadorDeCadastros = 1;
     numCadastro = 0;
 
+    numMatriz = 0;
+
 
     do
     {   
@@ -420,6 +437,7 @@ void main()
 
         printf("10  - Popular Banco de Dados de Pessoas\n");
         printf("11  - Popular Banco de Dados de Palestras\n");
+        printf("12  - Alocar teatro\n");
         printf("\n");
         printf("20 - Testar/Vizualizar Banco de Dados Palestra\n");
         
@@ -455,6 +473,10 @@ void main()
 
             case 11:
                 teste_de_palestra();
+            break;
+
+            case 12:
+                alocar_teatro();
             break;
 
             case 20:
