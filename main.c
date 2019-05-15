@@ -18,6 +18,7 @@
 #include <time.h>
 #include <string.h>
 
+
 #include "_prototipos.h"
 #include "_Terminal.h"
 
@@ -92,6 +93,8 @@ void menu4()
             break;
                 
             case 3:
+                mostrarMatriz();
+                reservarUmLugar();
                 mostrarMatriz();
             break;
 

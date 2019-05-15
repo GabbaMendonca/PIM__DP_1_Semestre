@@ -183,3 +183,49 @@ void mostrarMatriz()
     teatro[numMatriz].filas--;
     teatro[numMatriz].colunas--;
 }
+
+
+
+void reservarUmLugar()
+{
+    int Colunas;
+    char Filas;
+    
+    do
+    {
+        printf("\nQual a fila ? ");
+        scanf("%c%*c", &Filas);
+        fflush(stdin);
+
+        printf("\nQual a coluna ? ");
+        scanf("%d%*c", &Colunas);
+        fflush(stdin);
+
+        Filas = toupper(Filas);
+
+
+        if (Filas < 'A' ||
+            Filas > (teatro[numMatriz].filas + 'A') ||
+            Colunas < 1 ||
+            Colunas > (teatro[numMatriz].colunas + 1))
+        {
+            printf("Este lugar não exite !!!\n");
+            printf("Pessione ENTER para continuar ... ");
+            getchar();
+            return;
+        }
+        else
+        {
+            if (teatro[numMatriz].matriz[Colunas - 64][Filas - 64] == 32)
+            {
+                teatro[numCadastro].matriz[Colunas - 64][Filas - 64] = 'X';
+                return;
+            }
+            else
+            {
+                printf("Lugar ocupado");
+            }
+        }
+    }
+    while(1);
+}

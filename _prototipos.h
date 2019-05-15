@@ -156,9 +156,12 @@ int numCadastro;
 struct DADOS_MATRIZ
 {   
     int **matriz;
-    int capacidade;
     int filas, colunas;
-    int qtdLugaresDef, qtdDefDiponivel;
+    int capacidade;
+
+    int qtdDefDiponivel;
+    
+    int qtdLugaresDef;
     int porcentagemDeLugaresDef;
 };
 
@@ -430,7 +433,7 @@ void calculaDeficientes();
 void inserirDadosMatriz(int categoria);
 
 
-void reservarLugar();
+void reservarUmLugar();
 
 
 int assentos(int **matrizAssentos, char fila, int coluna, int categoria);
