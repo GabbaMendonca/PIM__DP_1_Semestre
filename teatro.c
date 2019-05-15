@@ -11,12 +11,12 @@
 
 //     printf("Digite a quantidade de :\n\n");
 //     printf("\tFilas: ");
-//     scanf("%d%*c", &teatro[numMatriz].filas);
+//     scanf("%d%*c", &teatro.filas);
 //     //printf("\n");
 //     fflush(stdin);
 
 //     printf("\tColunas: ");
-//     scanf("%d%*c", &teatro[numMatriz].colunas);
+//     scanf("%d%*c", &teatro.colunas);
 //     fflush(stdin);
 //     printf("\n\n");
 
@@ -28,7 +28,7 @@
 //         Validando parametros recebidos
 //     */
 
-//     if (teatro[numMatriz].filas < 1 || teatro[numMatriz].colunas < 1)
+//     if (teatro.filas < 1 || teatro.colunas < 1)
 //     {
 //         printf("** Erro: Parametro invalido **\n");
 //         //return (NULL);
@@ -41,8 +41,8 @@
 
 void matriz()
 {
-    teatro[numMatriz].filas++;
-    teatro[numMatriz].colunas++;
+    teatro.filas++;
+    teatro.colunas++;
 
     /*
         *** ALOCA MATRIZ ***
@@ -56,16 +56,16 @@ void matriz()
     /*
         Aloca o vetor para a posição de filas  
     */
-    pointer = (int **)calloc(teatro[numMatriz].filas, sizeof(sizeof(int *)));
+    pointer = (int **)calloc(teatro.filas, sizeof(sizeof(int *)));
 
 
     /*
         Aloca o vetor para a posição de colunas
     */
 
-    for (int n = 0; n < teatro[numMatriz].colunas; n++)
+    for (int n = 0; n < teatro.colunas; n++)
     {
-        pointer[n] = (int *)calloc(teatro[numMatriz].colunas, sizeof(int));
+        pointer[n] = (int *)calloc(teatro.colunas, sizeof(int));
     }
 
 
@@ -85,7 +85,7 @@ void matriz()
         na tabela ASCII.
     */
 
-    for (int i = 1; i < teatro[numMatriz].filas; i++)
+    for (int i = 1; i < teatro.filas; i++)
     {
         pointer[i][0] = 64 + i;
     }
@@ -95,7 +95,7 @@ void matriz()
         Carrega a fila 0 com os numeros dos lugares 1,2,3,4 ...
     */
 
-    for (int j = 1; j < teatro[numMatriz].colunas; j++)
+    for (int j = 1; j < teatro.colunas; j++)
     {
         pointer[0][j] = j;
     }
@@ -105,19 +105,19 @@ void matriz()
         Carrega todo o resto da matriz com hufen ( ) - espaço - a partir da posição [1][1]
     */
 
-    for (int i = 1; i < teatro[numMatriz].filas; i++)
+    for (int i = 1; i < teatro.filas; i++)
     {
-        for (int j = 1; j < teatro[numMatriz].colunas; j++)
+        for (int j = 1; j < teatro.colunas; j++)
         {
             pointer[i][j] = 32;
         }
     }
 
 
-    teatro[numMatriz].matriz = pointer;
+    teatro.matriz = pointer;
 
-    teatro[numMatriz].filas--;
-    teatro[numMatriz].colunas--;
+    teatro.filas--;
+    teatro.colunas--;
 }
 
 
@@ -126,8 +126,8 @@ void mostrarMatriz()
 
     int i, j;
 
-    teatro[numMatriz].filas++;
-    teatro[numMatriz].colunas++;
+    teatro.filas++;
+    teatro.colunas++;
 
     printf("TEATRO\n\n");
 
@@ -137,42 +137,42 @@ void mostrarMatriz()
 
 
     /* Carrega na tela a fila 0 onde mostra o numero de cada coluna */
-    for (j = 1; j < teatro[numMatriz].colunas; j++)
+    for (j = 1; j < teatro.colunas; j++)
     {
-        printf("[- %d -]", teatro[numMatriz].matriz[0][j]);
+        printf("[- %d -]", teatro.matriz[0][j]);
     }
 
 
     /* Mostra a matriz na tela */
 
     // Laço responsavel por iniciar as fila da matriz
-    for (i = 1; i < teatro[numMatriz].filas; i++)
+    for (i = 1; i < teatro.filas; i++)
     {
 
         // mostar a coluna 0 apresentando as letras respectivas de cada fila
-        printf("\n Fila %c | ", teatro[numMatriz].matriz[i][0]);
+        printf("\n Fila %c | ", teatro.matriz[i][0]);
 
         // Laço responsavel por mostrar as colunas da matriz
-        for (j = 1; j < teatro[numMatriz].colunas; j++)
+        for (j = 1; j < teatro.colunas; j++)
         {
-            if (teatro[numMatriz].matriz[i][j] == 120)
+            if (teatro.matriz[i][j] == 120)
             {
-                printf("[ -%c- ]", teatro[numMatriz].matriz[i][j]);
+                printf("[ -%c- ]", teatro.matriz[i][j]);
             }
             else
             {
-                printf("[  %c  ]", teatro[numMatriz].matriz[i][j]);
+                printf("[  %c  ]", teatro.matriz[i][j]);
             }
         }
     }
 
 
-    teatro[numMatriz].capacidade = (teatro[numMatriz].filas - 1) * (teatro[numMatriz].colunas - 1);
+    teatro.capacidade = (teatro.filas - 1) * (teatro.colunas - 1);
 
     /*
         Dados do teaotro para o usuario
     */
-    printf("\n\nCapacidade %d Lugares", teatro[numMatriz].capacidade);
+    printf("\n\nCapacidade %d Lugares", teatro.capacidade);
 
     printf("\n\n X - Ocupado(s)");
     printf("  \n @ - Deficiente(s)");
@@ -180,8 +180,8 @@ void mostrarMatriz()
 
     printf("\n");
 
-    teatro[numMatriz].filas--;
-    teatro[numMatriz].colunas--;
+    teatro.filas--;
+    teatro.colunas--;
 }
 
 
@@ -203,11 +203,11 @@ void reservarUmLugar()
 
         Filas = toupper(Filas);
 
-
+        // matriz[fila][coluna]
         if (Filas < 'A' ||
-            Filas > (teatro[numMatriz].filas + 'A') ||
+            Filas > (teatro.filas + 'A') ||
             Colunas < 1 ||
-            Colunas > (teatro[numMatriz].colunas + 1))
+            Colunas > (teatro.colunas + 1))
         {
             printf("Este lugar não exite !!!\n");
             printf("Pessione ENTER para continuar ... ");
@@ -216,9 +216,13 @@ void reservarUmLugar()
         }
         else
         {
-            if (teatro[numMatriz].matriz[Colunas - 64][Filas - 64] == 32)
+            //if (teatro.matriz[(Colunas - 64)][(Filas - 64)] == 32)
+            //Colunas = 64 - Colunas;
+            Filas = Filas - 64;
+            
+            if (teatro.matriz[Filas][Colunas] == 32)
             {
-                teatro[numCadastro].matriz[Colunas - 64][Filas - 64] = 'X';
+                teatro.matriz[Filas][Colunas] = 'X';
                 return;
             }
             else

@@ -387,8 +387,8 @@ void teste_de_pessoa()
 
 void alocar_teatro()
 {
-    teatro[numMatriz].filas = 10;
-    teatro[numMatriz].colunas = 10;
+    teatro.filas = 10;
+    teatro.colunas = 10;
 
     matriz();
 }
@@ -417,8 +417,6 @@ void main()
 
     contadorDeCadastros = 1;
     numCadastro = 0;
-
-    numMatriz = 0;
 
 
     do

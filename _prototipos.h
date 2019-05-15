@@ -165,9 +165,7 @@ struct DADOS_MATRIZ
     int porcentagemDeLugaresDef;
 };
 
-struct DADOS_MATRIZ teatro[VETOR];
-
-int numMatriz;
+struct DADOS_MATRIZ teatro;
 
 /*
     ===============================
