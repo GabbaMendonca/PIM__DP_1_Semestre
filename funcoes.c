@@ -381,7 +381,7 @@ void cadastrarPessoa()
     do
     {
         LIMPA_TERM
-        exibirPessoa(contadorDeCadastros);
+        exibirPessoa();
         
         printf("\n\nDados estão corretos ? ( S / N ) : ");
 
@@ -432,22 +432,22 @@ void Pessoa(int categoria)
     pessoa[numCadastro].categoria = categoria;
 
     LIMPA_TERM
-    exibirPessoa(contadorDeCadastros);
+    exibirPessoa();
     printf("\n\n");
     inserirCpf();
 
     LIMPA_TERM
-    exibirPessoa(contadorDeCadastros);
+    exibirPessoa();
     printf("\n\n");
     inserirNome();
 
     LIMPA_TERM
-    exibirPessoa(contadorDeCadastros);
+    exibirPessoa();
     printf("\n\n");
     inserirIdade();
 
     LIMPA_TERM
-    exibirPessoa(contadorDeCadastros);
+    exibirPessoa();
     printf("\n\n");
     inserirEmail();
 
@@ -492,10 +492,8 @@ void inserirEmail()
 
 
 
-void exibirPessoa(int numDoCadastro)
+void exibirPessoa()
 {   
-
-    numCadastro = numDoCadastro - 1;
 
     char categoria[16];
     
@@ -528,14 +526,42 @@ void exibirPessoa(int numDoCadastro)
 
 
 
+/*
+    ======
+*/
+
+
+
+
 void alteraDadosPessoa()
 {
+    
+    char categoria[16];
+    
+    if(pessoa[numCadastro].categoria == 1)
+    {
+        strcpy(categoria, "Usuario Comum");
+    }
+    if(pessoa[numCadastro].categoria == 2)
+    {
+        strcpy(categoria, "Professor");
+    }
+    if(pessoa[numCadastro].categoria == 3)
+    {
+        strcpy(categoria, "Convidado");
+    }
+    if(pessoa[numCadastro].categoria == 4)
+    {
+        strcpy(categoria, "Deficiente");
+    }
+
+
     LIMPA_TERM
     printf("( 1 ) >>> CPF ............... : %ld\n", pessoa[numCadastro].cpf);
     printf("( 2 ) >>> Nome .............. : %s\n",   pessoa[numCadastro].nome);
     printf("( 3 ) >>> Idade ............. : %d\n", pessoa[numCadastro].idade);
     printf("( 4 ) >>> Email ............. : %s\n",   pessoa[numCadastro].email);
-    printf("( 5 ) >>> Categoria ......... : %d\n",   pessoa[numCadastro].categoria);
+    printf("( 5 ) >>> Categoria ......... : %s\n",   categoria);
 
     printf("\n( 0 ) <<< Voltar\n");
 
@@ -565,6 +591,10 @@ void alteraDadosPessoa()
 
         case 4:
             inserirEmail();
+        break;
+
+        case 5:
+            inserirCategoria();
         break;
 
         default:
@@ -790,7 +820,8 @@ void exibirTodasAsPessoasCadastradas()
             menuPesquisarPessoa();
         }
 
-        exibirPessoa(opc);
+        numCadastro = opc - 1;
+        exibirPessoa();
 
         printf("\n\nDeseja confirmar  ? ( S / N ) : ");
 
@@ -830,11 +861,12 @@ void pesquisarPorCPF()
     long CPF;
     scanf("%ld%*c", &CPF);
 
-    for(int i = 0; i < contadorDeCadastros ;i++)
+    for(int i = 0; i <= contadorDeCadastros ;i++)
     {
         if(CPF == pessoa[i].cpf)
-        {
-            exibirPessoa(i + 1);
+        {   
+            numCadastro = i;
+            exibirPessoa();
             return;
         }
     }
@@ -852,7 +884,8 @@ void pesquisarPorID()
     int ID;
     scanf("%d%*c", &ID);
 
-    exibirPessoa(ID);
+    numCadastro = ID - 1;
+    exibirPessoa();
 }
 
 
@@ -871,6 +904,31 @@ void pesquisarPorID()
 void editarCadastro()
 {
     alteraDadosPessoa();
+}
+
+void inserirCategoria()
+{
+
+    printf("(1) >>> Usuario Comum\n");
+    printf("(2) >>> Professor\n");
+    printf("(3) >>> Convidado\n");
+    printf("(4) >>> Deficiente\n\n");
+
+    printf("Digite a catogoria : ");
+    
+    int opc;
+    scanf("%d%*c", &opc);
+    fflush(stdin);
+
+    if(opc > 0 && opc < 5)
+    {
+        pessoa[numCadastro].categoria = opc;
+    }
+    else
+    {
+        printf("Categoria invalida\n\n");
+    }
+    
 }
 
 /*

@@ -69,6 +69,7 @@ void menu6()
 // MENU 4 - (Trello - Atividade 007) : https://trello.com/c/cX8Maj2L
 void menu4()
 {
+    
     do
     {
         printf("\n------------------------------");
@@ -86,7 +87,7 @@ void menu4()
         {
             case 1:
                 editarCadastro();
-                exibirPessoa((numCadastro + 1));
+                exibirPessoa();
             break;
                 
             case 2:
@@ -94,9 +95,17 @@ void menu4()
             break;
                 
             case 3:
-                mostrarMatriz();
-                reservarUmLugar();
-                mostrarMatriz();
+            
+                if( reservarUmAssento(pessoa[numCadastro].categoria) )
+                {
+                    continue;
+                }
+                else
+                {
+                    exibirPessoa();
+                    menu4();
+                }
+                
             break;
 
             case 0:
@@ -155,11 +164,11 @@ void menuPesquisarPessoa()
 }
 
 void pesquisarPessoa()
-{   
+{
     menuPesquisarPessoa();
-
     menu4();
 }
+
 
 // MENU 03 - Pesquisar (Trello - Atividade 005) : https://trello.com/c/2hHh8WCf
 void menuPesquisar()
@@ -378,11 +387,32 @@ void teste_de_pessoa()
     strcpy(pessoa[8].nome, "Diana");
     strcpy(pessoa[9].nome, "She-ra");
 
+    // printf("(1) >>> Usuario Comum\n");
+    // printf("(2) >>> Professor\n");
+    // printf("(3) >>> Convidado\n");
+    // printf("(4) >>> Deficiente\n\n");
+
+    for(int c = 0; c <= 2; c++)
+    {
+        pessoa[c].categoria = 1;
+    }
+    for(int c = 3; c <= 5; c++)
+    {
+        pessoa[c].categoria = 2;
+    }
+    for(int c = 6; c <= 8; c++)
+    {
+        pessoa[c].categoria = 3;
+    }
+    
+    pessoa[9].categoria = 4;
+
+
+
     for(int j = 0; j < 10; j++)
     {
         pessoa[j].cpf = 11111111111;
         pessoa[j].idade = 21 + j;
-        pessoa[j].categoria = 1;
 
         strcpy(pessoa[j].email, "unip.unip@unip.com");
     }
@@ -396,6 +426,17 @@ void alocar_teatro()
     teatro.colunas = 10;
 
     matriz();
+
+    for(int j = 1; j <= 10; j++)
+    {
+        teatro.matriz[1][j] = 'R';
+        teatro.matriz[2][j] = 'R';
+    }
+
+    for(int i = 1; i <= 5; i++)
+    {
+        teatro.matriz[10][i] = '@';
+    }
 }
 
 /*
@@ -422,6 +463,9 @@ void main()
 
     contadorDeCadastros = 1;
     numCadastro = 0;
+
+    teatro.filas = 0;
+    teatro.colunas = 0;
 
 
     do
@@ -470,7 +514,7 @@ void main()
             break;
 
             case 4:
-                pesquisarPessoa();
+                menuPesquisarPessoa();
             break;
 
             case 10:

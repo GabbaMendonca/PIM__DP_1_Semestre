@@ -175,7 +175,12 @@ struct DADOS_MATRIZ teatro;
 
 
 
-
+// Criando a enumeração:
+enum boolean {
+    true = 1, false = 0
+};
+// Permitindo a sua declaração como um tipo qualquer:
+typedef  enum boolean  bool;
 
 
 
@@ -296,7 +301,7 @@ void inserirEmail();
  * 
  * @param numDoCadastro Recebe o ID do cadasatro a ser buscado para exibição
  */
-void exibirPessoa(int numDoCadastro);
+void exibirPessoa();
 
 /**
  * @brief Contem a rotina de alterar dados caso ja cadastrados no sistema caso seja preciso.
@@ -321,7 +326,6 @@ void mostarTodasAsPessoas();
 void exibirTodasAsPessoasCadastradas();
 void pesquisarPorCPF();
 void pesquisarPorID();
-void pesquisarPessoa();
 /*
     ========================================
     $ PROTOTIPOS_FIM_PESQUISA_DE_PESSOA $
@@ -333,6 +337,7 @@ void pesquisarPessoa();
     ========================================
 */
 void editarCadastro();
+void inserirCategoria();
 /*
     ========================================
     $ PROTOTIPOS_FIM_EDITAR_CADASTRO $
@@ -431,8 +436,8 @@ void calculaDeficientes();
 void inserirDadosMatriz(int categoria);
 
 
-void reservarUmLugar();
-
+bool reservarUmAssento(int categoria);
+bool reservar(char Fila, int Coluna, int categoria);
 
 int assentos(int **matrizAssentos, char fila, int coluna, int categoria);
 
@@ -451,8 +456,10 @@ int assentos(int **matrizAssentos, char fila, int coluna, int categoria);
 void menuInicial();
 void menuCadastrar();
 
-void menu4();
+void pesquisarPessoa();
 void menuPesquisarPessoa();
+void menu4();
+
 
 void menu6();
 
