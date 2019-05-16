@@ -233,11 +233,11 @@ void menuCadastrar()
     do
     {
         LIMPA_TERM
-        printf("\n------------------------------");
-        printf("\n MENU 1 CADASTRAR ");
+        printf("\n-=----------------------------");
+        printf("\n MENU CADASTRAR \n");
         printf("\n (1) >>> Cadastrar Pessoa");
         printf("\n (2) >>> Cadastrar Palestra");
-        printf("\n (0) <<< Voltar");
+        printf("\n\n (0) <<< Voltar");
 
         printf("\n\n Escolha uma opação : ");
         scanf("%d%*c", &opc);
@@ -281,7 +281,7 @@ void menuInicial()
         printf("\n (2) >>> Pesquisar");
         printf("\n (3) >>> Sorteio");
         printf("\n (4) >>> E-mail");
-        printf("\n (0) <<< Sair");
+        printf("\n\n (0) <<< Sair");
 
         printf("\n\n Escolha uma opação : ");
         scanf("%d%*c", &opc);
@@ -365,11 +365,11 @@ void teste_de_palestra()
         palestra[j].hora = 11 + j;
         palestra[j].min = 21 + j;
 
-        palestra[j].qtdMaxLugares = 5;
+        palestra[j].qtdMaxLugares = 99;
         palestra[j].lugaresOcupados = j + 1;
     }
 
-    contadorDePalestra = 9;
+    contadorDePalestra = 11;
 
 }
 
@@ -417,7 +417,7 @@ void teste_de_pessoa()
         strcpy(pessoa[j].email, "unip.unip@unip.com");
     }
 
-    contadorDeCadastros = 9;
+    contadorDeCadastros = 11;
 }
 
 void alocar_teatro()

@@ -46,12 +46,17 @@ void cadastrarPalestra()
 {
 
     LIMPA_TERM
+    printf("\n-=-==-------------------------\n");
     printf("Numero da Palestra : %d\n", (contadorDePalestra));
     numPalestra = contadorDePalestra - 1;
 
+    exibirPalestra();
     inserirPalestra();
+
+    exibirPalestra();
     inserirCampus();
     
+    exibirPalestra();
     inserirData();
 
     int aux;
@@ -60,7 +65,7 @@ void cadastrarPalestra()
     do
     {
         LIMPA_TERM
-        exibirPalestra(contadorDePalestra);
+        exibirPalestra();
         
         printf("\n\nDados estão corretos ? ( S / N ) : ");
 
@@ -78,6 +83,7 @@ void cadastrarPalestra()
                 contadorDePalestra++;
                 printf("Pressione ENTER para sair ... !");
                 getchar();
+                getchar();
             return;
 
             case 'n':
@@ -91,9 +97,6 @@ void cadastrarPalestra()
         }
     }
     while(1);
-
-    
-
 }   /* Fim cadastrarPalestra */
 
 
@@ -127,7 +130,7 @@ void inserirData()
         palestra[numPalestra].min = 0;
 
 
-        exibirPalestra(contadorDePalestra);
+        exibirPalestra();
         printf("\n");
 
         printf("Data \n\n");
@@ -152,7 +155,7 @@ void inserirData()
         }
         while(1);
 
-        exibirPalestra(contadorDePalestra);
+        exibirPalestra();
         printf("\n");
 
         printf("Data \n\n");
@@ -177,7 +180,7 @@ void inserirData()
         }
         while(1);
 
-        exibirPalestra(contadorDePalestra);
+        exibirPalestra();
         printf("\n");
 
         printf("Data \n\n");
@@ -201,7 +204,7 @@ void inserirData()
         }
         while(1);
 
-        exibirPalestra(contadorDePalestra);
+        exibirPalestra();
         printf("\n");
 
         printf("Horario \n\n");
@@ -226,7 +229,7 @@ void inserirData()
         }
         while(1);
 
-        exibirPalestra(contadorDePalestra);
+        exibirPalestra();
         printf("\n");
 
         printf("Horario \n\n");
@@ -251,17 +254,15 @@ void inserirData()
         }
         while(1);
 
-        exibirPalestra(contadorDePalestra);
+        exibirPalestra();
         printf("\n");
 }
 
 
 
 
-void exibirPalestra(int numDaPalestra)
+void exibirPalestra()
 {
-
-    numPalestra = numDaPalestra - 1;
 
     LIMPA_TERM
     printf("Nome da Paletra ... : %s\n", palestra[numPalestra].nomePalestra);
@@ -328,49 +329,46 @@ void alteraDadosPalestra()
 
 void cadastrarPessoa()
 {
+    bool _while;
+    _while = true;
 
-    LIMPA_TERM
-    printf("Numero do Cadastro : %d\n\n", contadorDeCadastros);
-    numCadastro = contadorDeCadastros - 1;
+    do
+    {
+        LIMPA_TERM
+        printf("\n-=-=--------------------------\n");
+        printf("Numero do Cadastro : %d\n\n", contadorDeCadastros);
+        numCadastro = contadorDeCadastros - 1;
 
-    printf("Você quer cadastrar um ?\n\n");
+        printf("Você quer cadastrar um ?\n\n");
 
-    printf("(1) >>> Usuario Comum\n");
-    printf("(2) >>> Professor\n");
-    printf("(3) >>> Convidado\n");
-    printf("(4) >>> Deficiente\n\n");
+        printf("(1) >>> Usuario Comum\n");
+        printf("(2) >>> Professor\n");
+        printf("(3) >>> Convidado\n");
+        printf("(4) >>> Deficiente\n\n");
 
-    printf("(0) <<< Voltar\n\n");
+        printf("(0) <<< Voltar\n\n");
 
-    int opc;
-    printf("Opção: ");
-    scanf("%d%*c", &opc);
-    fflush(stdin);
+        int opc;
+        printf("Opção: ");
+        scanf("%d%*c", &opc);
+        fflush(stdin);
 
-        switch (opc)
+        if(opc == 0)
         {
-            case 0:
-                return;
-
-            case 1:
-                Pessoa(1);
-            break;
-
-            case 2:
-                Pessoa(2);
-            break;
-
-            case 3:
-                Pessoa(3);
-            break;
-
-            case 4:
-                Pessoa(4);
-            break;
-
-            default:
-                break;
+            return;
         }
+        else if(opc > 0 && opc < 5)
+        {
+            Pessoa(opc);
+            _while = false;
+        }
+        else
+        {
+            _while = true;
+        }
+            
+    }
+    while(_while);
 
 
 /*
@@ -378,8 +376,11 @@ void cadastrarPessoa()
 */
 
 
+    _while = true;
+
     do
     {
+
         LIMPA_TERM
         exibirPessoa();
         
@@ -398,9 +399,14 @@ void cadastrarPessoa()
                 printf("Dados gravados com sucesso !\n");
                 // GRAVAR DADOS
                 contadorDeCadastros++;
-                printf("Pressione ENTER para sair ... !");
+                palestra[numPalestra].lugaresOcupados = palestra[numPalestra].lugaresOcupados++;
+                _while = false;
+
+                printf("Pressione ENTER para continuar ... !");
                 getchar();
-            return;
+                getchar();
+
+            break;
 
             case 'n':
             case 'N':
@@ -412,9 +418,32 @@ void cadastrarPessoa()
             break;
         }
     }
-    while(1);
+    while(_while);
 
 
+    printf("\n\nDeseja escolher uma palestra agora ? ( S / N ) : ");
+
+    char opc3;
+    opc3 = getchar();
+    fflush(stdin);
+
+    switch(opc3)
+    {
+
+        case 's':
+        case 'S':
+            pesquisarPalestra();
+        break;
+
+        case 'n':
+        case 'N':
+            menuInicial();
+        break;
+
+        default:
+            printf("Opcão invalida!");
+        break;
+    }
 }
 
 
@@ -429,27 +458,32 @@ void cadastrarPessoa()
 
 void Pessoa(int categoria)
 {
-    pessoa[numCadastro].categoria = categoria;
 
     LIMPA_TERM
+    printf("\n-=-==-------------------------\n");
     exibirPessoa();
     printf("\n\n");
     inserirCpf();
 
     LIMPA_TERM
+    printf("\n-=-==-------------------------\n");
     exibirPessoa();
     printf("\n\n");
     inserirNome();
 
     LIMPA_TERM
+    printf("\n-=-==-------------------------\n");
     exibirPessoa();
     printf("\n\n");
     inserirIdade();
 
     LIMPA_TERM
+    printf("\n-=-==-------------------------\n");
     exibirPessoa();
     printf("\n\n");
     inserirEmail();
+
+    pessoa[numCadastro].categoria = categoria;
 
 }
 
@@ -514,8 +548,6 @@ void exibirPessoa()
         strcpy(categoria, "Deficiente");
     }
     
-
-    LIMPA_TERM
     printf("CPF ............... : %ld\n", pessoa[numCadastro].cpf);
     printf("Nome .............. : %s\n",   pessoa[numCadastro].nome);
     printf("Idade ............. : %d\n", pessoa[numCadastro].idade);
@@ -619,7 +651,7 @@ void mostarTodasAsPalestras()
 
     printf("| Num  |  Palestra\n\n");
 
-    for(int i = 0; i <= contadorDePalestra; i++)
+    for(int i = 0; i < (contadorDePalestra - 1); i++)
     {
         if(i < 9)
         {
@@ -726,7 +758,8 @@ void pesquisarPalestra()
             menuPesquisar();
         }
 
-        exibirPalestra(opc);
+        numPalestra = (opc - 1);
+        exibirPalestra();
 
         validarPalestra();
 
@@ -781,7 +814,7 @@ void mostarTodasAsPessoas()
 
     printf("| Num  |  Pessoas\n\n");
 
-    for(int i = 0; i <= contadorDeCadastros; i++)
+    for(int i = 0; i < (contadorDeCadastros - 1); i++)
     {
         if(i < 9)
         {

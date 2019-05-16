@@ -2,7 +2,7 @@
 #ifndef __PROTOTIPOS_H_
 #define __PROTOTIPOS_H_
 
-#define VETOR 10
+#define VETOR 20
 
 #define MIN 3
 #define MED 50
@@ -239,7 +239,7 @@ void inserirData();
  * 
  * @param numDaPalestra  Recebe o ID da palestra a ser ixibida
  */
-void exibirPalestra(int numDaPalestra);
+void exibirPalestra();
 
 
 /**
