@@ -126,6 +126,13 @@ void mostrarMatriz()
 
     int i, j;
 
+    if( teatro.filas    == 0 ||
+        teatro.colunas  == 0 )
+    {
+        printf("*** NÃO HÁ NENHUM CAMPUS CADASTRADO ***");
+        menuInicial();
+    }
+
     teatro.filas++;
     teatro.colunas++;
 
@@ -186,50 +193,151 @@ void mostrarMatriz()
 
 
 
-void reservarUmLugar()
+bool reservarUmAssento(int categoria)
 {
-    int Colunas;
-    char Filas;
-    
+    int Coluna;
+    char Fila;
+
+    LIMPA_TERM
+    mostrarMatriz();
+
     do
     {
-        printf("\nQual a fila ? ");
-        scanf("%c%*c", &Filas);
+        printf("\n");
+        printf("\n--------------------------------------");
+        printf("\nNão queria estar aqui ???");
+        printf("\nDigite 0 (zero) para sair da seleção de lugares ...");
+        printf("\n--------------------------------------");
+
+        printf("\n\n Qual a fila do assento ??? : ");
+        scanf("%c%*c", &Fila);
         fflush(stdin);
 
-        printf("\nQual a coluna ? ");
-        scanf("%d%*c", &Colunas);
+        if(Fila == '0')
+        {
+            return false;
+        }
+
+        printf(" Qual a coluna do assento ??? : ");
+        scanf("%d%*c", &Coluna);
         fflush(stdin);
 
-        Filas = toupper(Filas);
+        if(Coluna == 0)
+        {
+            return false;
+        }
+
+
+
+
+        Fila = toupper(Fila);
+
+
+
 
         // matriz[fila][coluna]
-        if (Filas < 'A' ||
-            Filas > (teatro.filas + 'A') ||
-            Colunas < 1 ||
-            Colunas > (teatro.colunas + 1))
+
+        if (Fila    < 'A'                   ||
+            Fila    > ( teatro.filas + 'A' )||
+            Coluna  < 1                     ||
+            Coluna  > ( teatro.colunas + 1 ) )
         {
+
             printf("Este lugar não exite !!!\n");
             printf("Pessione ENTER para continuar ... ");
             getchar();
-            return;
+
+            return false;
+
         }
         else
         {
-            //if (teatro.matriz[(Colunas - 64)][(Filas - 64)] == 32)
-            //Colunas = 64 - Colunas;
-            Filas = Filas - 64;
-            
-            if (teatro.matriz[Filas][Colunas] == 32)
-            {
-                teatro.matriz[Filas][Colunas] = 'X';
-                return;
-            }
-            else
-            {
-                printf("Lugar ocupado");
-            }
+            return reservar(Fila, Coluna, categoria);
         }
+
+
     }
     while(1);
+}
+
+
+bool reservar(char Fila, int Coluna, int categoria)
+{
+    Fila = Fila - 64;
+            
+    // printf("(1) >>> Usuario Comum\n");
+    // printf("(2) >>> Professor\n");
+    // printf("(3) >>> Convidado\n");
+    // printf("(4) >>> Deficiente\n\n");
+
+    /*
+        Usuario comum
+    */
+    if( categoria == 1 )
+    {
+        if (teatro.matriz[Fila][Coluna] == '@' ||
+            teatro.matriz[Fila][Coluna] == 'R' || 
+            teatro.matriz[Fila][Coluna] == 'x' )
+        {
+            goto ERRO;
+        }
+        else
+        {
+            goto OK;
+        }
+    }
+    
+    /*
+        Professor e convidado
+    */
+    if( categoria == 2 || categoria == 3 )
+    {
+        if (teatro.matriz[Fila][Coluna] == '@' || 
+            teatro.matriz[Fila][Coluna] == 'x' )
+        {
+            goto ERRO;
+        }
+        else
+        {
+            goto OK;
+        }
+    }
+
+    /*
+        Deficiente
+    */
+    if( categoria == 4 )
+    {
+        if (teatro.matriz[Fila][Coluna] == 'R' ||
+            teatro.matriz[Fila][Coluna] == 'x' )
+        {
+            goto ERRO;
+        }
+        else
+        {
+            goto OK;
+        }
+    }
+
+
+    ERRO:
+
+    LIMPA_TERM
+
+    printf("\n");
+    printf("\n--------------------------------------\n");
+    printf(" Epa ... Você não pode reservar o assento %c%d !\n", (Fila + 64) , Coluna);
+    printf(" Escolha outro assento ...\n\n");
+    printf(" Pressione ENTER para continuar ...");
+    printf("\n--------------------------------------");
+    printf("\n");
+
+    getchar();
+    return false;
+
+    OK:
+
+    teatro.matriz[Fila][Coluna] = 'x';
+    return true;
+
 }
