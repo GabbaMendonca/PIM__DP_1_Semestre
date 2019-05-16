@@ -153,7 +153,7 @@ void menuPesquisarPessoa()
             return;
 
             case 0:
-                return;
+                menuPesquisar();
 
             default:
                 printf("Opção Invalida !!!");
