@@ -36,6 +36,11 @@ int ano()
 
 
 
+
+
+
+
+
 /*
     ====================================
     $ FUNCAO_INICIO_CADASTRAR_PALESTRA $
@@ -81,7 +86,7 @@ void cadastrarPalestra()
                 printf("Dados gravados com sucesso !\n");
                 // GRAVAR DADOS
                 contadorDePalestra++;
-                printf("Pressione ENTER para sair ... !");
+                printf("Pressione ENTER para continuar ... !");
                 getchar();
                 getchar();
             return;
@@ -97,7 +102,7 @@ void cadastrarPalestra()
         }
     }
     while(1);
-}   /* Fim cadastrarPalestra */
+}
 
 
 
@@ -274,7 +279,6 @@ void exibirPalestra()
 
 
 
-
 void alteraDadosPalestra()
 { 
 
@@ -321,6 +325,14 @@ void alteraDadosPalestra()
     $ FUNCAO_FIM_CADASTRAR_PALESTRA $
     =================================
 */
+
+
+
+
+
+
+
+
 /*
     ====================================
     $ FUNCAO_INICIO_CADASTRAR_PESSOA $
@@ -371,9 +383,6 @@ void cadastrarPessoa()
     while(_while);
 
 
-/*
-    ======
-*/
 
 
     _while = true;
@@ -419,6 +428,8 @@ void cadastrarPessoa()
         }
     }
     while(_while);
+
+
 
 
     printf("\n\nDeseja escolher uma palestra agora ? ( S / N ) : ");
@@ -486,6 +497,9 @@ void Pessoa(int categoria)
     pessoa[numCadastro].categoria = categoria;
 
 }
+
+
+
 
 void inserirCpf()
 {
@@ -635,16 +649,90 @@ void alteraDadosPessoa()
     }
 }
 
+
 /*
     ====================================
     $ FUNCAO_FIM_CADASTRAR_PESSOA $
     ====================================
 */
+
+
+
+
+
+
+
+
 /*
     ======================================
     $ FUNCAO_INICIO_PESQUISA_DE_PALESTRA $
     ======================================
 */
+
+
+void pesquisarPalestra()
+{
+    LIMPA_TERM
+    if(palestra[0].dia == 0)
+    {
+        printf("Nenhuma palestra esta cadastrada");
+    }
+    else
+    {
+        printf("\n-==-==------------------------\n");
+        mostarTodasAsPalestras();
+
+        printf("\n(0) <<< Voltar\n");
+
+        printf("\nDigite o numero da palestra para ver os detalhes : ");
+
+        int opc;
+        scanf("%d%*c", &opc);
+        fflush(stdin);
+
+        if (opc == 0)
+        {
+            menuPesquisar();
+        }
+
+        numPalestra = (opc - 1);
+        exibirPalestra();
+
+        validarPalestra();
+
+        printf("\n\nDeseja confirmar  ? ( S / N ) : ");
+
+        char opc2;
+        opc2 = getchar();
+        fflush(stdin);
+
+        switch(opc2)
+        {
+            case 's':
+            case 'S':
+
+                menu6();
+                // printf("Função ainda não produzida!");
+                // getchar();
+                // getchar();
+            return;
+
+            case 'n':
+            case 'N':
+                printf("Função ainda não produzida!");
+                getchar();
+                getchar();
+            break;
+
+            default:
+                printf("Opcão invalida!");
+            break;
+        }
+    }
+}
+
+
+
 
 void mostarTodasAsPalestras()
 {
@@ -734,78 +822,29 @@ void validarPalestra()
 
 }
 
-void pesquisarPalestra()
-{
-    LIMPA_TERM
-    if(palestra[0].dia == 0)
-    {
-        printf("Nenhuma palestra esta cadastrada");
-    }
-    else
-    {
-        mostarTodasAsPalestras();
-
-        printf("\n(0) <<< Voltar\n");
-
-        printf("\nDigite o numero da palestra para ver os detalhes : ");
-
-        int opc;
-        scanf("%d%*c", &opc);
-        fflush(stdin);
-
-        if (opc == 0)
-        {
-            menuPesquisar();
-        }
-
-        numPalestra = (opc - 1);
-        exibirPalestra();
-
-        validarPalestra();
-
-        printf("\n\nDeseja confirmar  ? ( S / N ) : ");
-
-        char opc2;
-        opc2 = getchar();
-        fflush(stdin);
-
-        switch(opc2)
-        {
-            case 's':
-            case 'S':
-
-                menu6();
-                // printf("Função ainda não produzida!");
-                // getchar();
-                // getchar();
-            return;
-
-            case 'n':
-            case 'N':
-                printf("Função ainda não produzida!");
-                getchar();
-                getchar();
-            break;
-
-            default:
-                printf("Opcão invalida!");
-            break;
-        }
-    }
-}
-
-
 
 /*
     ======================================
     $ FUNCAO_FIM_PESQUISA_DE_PALESTRA $
     ======================================
 */
+
+
+
+
 /*
     ======================================
     $ FUNCAO_INICIO_PESQUISA_DE_PESSOA $
     ======================================
 */
+
+
+void pesquisarPessoa()
+{
+    menuPesquisarPessoa();
+    menu4();
+}
+
 
 //(Trello - Atividade 006) : https://trello.com/c/z2Bv6kdl
 
@@ -854,6 +893,7 @@ void exibirTodasAsPessoasCadastradas()
         }
 
         numCadastro = opc - 1;
+        LIMPA_TERM
         exibirPessoa();
 
         printf("\n\nDeseja confirmar  ? ( S / N ) : ");
@@ -899,13 +939,14 @@ void pesquisarPorCPF()
         if(CPF == pessoa[i].cpf)
         {   
             numCadastro = i;
+            LIMPA_TERM
             exibirPessoa();
             return;
         }
     }
 
     printf("Não encontrei !");
-    return;
+    pesquisarPessoa();
 }
 
 
