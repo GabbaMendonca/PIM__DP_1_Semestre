@@ -33,7 +33,6 @@
 */
 
 // MENU 6 - (Trello - Atividade 014) : https://trello.com/c/lsOI0ECR
-
 void menu6()
 {
     do
@@ -487,6 +486,8 @@ void main()
         printf("Funçoes de Teste");
         printf("\n");
 
+        printf("0 - Rodar todas as funções de teste\n\n");
+
         printf("10  - Popular Banco de Dados de Pessoas\n");
         printf("11  - Popular Banco de Dados de Palestras\n");
         printf("12  - Alocar teatro\n");
@@ -503,6 +504,12 @@ void main()
 
         switch(opc)
         {
+            case 0:
+                teste_de_pessoa();
+                alocar_teatro();
+                pesquisarPalestra();
+            break;
+
             case 1:
                 menuInicial();
             break;
