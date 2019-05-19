@@ -1,10 +1,13 @@
 /**
-* @file Projeto do PIM
+* @file Projeto do PIM - Projto Integrado Multidisciplinar
 *
-* @brief Projeto completo do PIM com as funções integradas
+* @brief Este projeto academico foi desenvolvido pelos alunos da UNIP para o PIM.
+* O objetivo geral cadastrar uma pessoa para assistir uma palestra e gerar um ticket.
 *
-* @autor(es): Gabriel S. Mendonça, Gabriel A. Maranhão,
-*             Lucas Apolonio.
+* @autor(es):   Gabriel S. Mendonça,
+*               Gabriel A. Maranhão,
+*               Lucas Apolonio,
+*               Alexandre.
 *
 * @warning Documentar código é muito importante.
 * @todo - Lista do que implementar
@@ -96,12 +99,13 @@ void menu4()
                 
             case 3:
             
-                if( reservarUmAssento(pessoa[numCadastro].categoria) )
+                if( reservarUmAssento(pessoa[ID_Pessoa].categoria) )
                 {
-                    continue;
+                    menuInicial();
                 }
                 else
-                {
+                {   
+                    LIMPA_TERM
                     exibirPessoa();
                     menu4();
                 }
@@ -454,10 +458,13 @@ void main()
 {
 
     contadorDePalestra = 1;
-    numPalestra = 0;
+    ID_Palestra = 0;
 
     contadorDeCadastros = 1;
-    numCadastro = 0;
+    ID_Pessoa = 0;
+
+    contadorDeTickets = 1;
+    numeroTicket = 0;
 
     teatro.filas = 0;
     teatro.colunas = 0;
