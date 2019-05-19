@@ -197,8 +197,7 @@ void menuPesquisar()
             break;
 
         case 3:
-            printf("Função ainda não produzida!");
-            //Caminho Menu Sorteio
+            pesquisarTicket();
             break;
 
         case 4:
@@ -506,8 +505,8 @@ void main()
         {
             case 0:
                 teste_de_pessoa();
+                teste_de_palestra();
                 alocar_teatro();
-                pesquisarPalestra();
             break;
 
             case 1:
