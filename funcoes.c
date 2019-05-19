@@ -1059,11 +1059,11 @@ void exibirTicket()
     printf(" CPF ......: %ld \n", ticket[numeroTicket].CPF);
     printf(" Categoria : %s \n\n", categoria);
 
-    printf(" Nome da Palestra : %s \n", palestra[ID_Palestra].nomePalestra);
+    printf(" Nome da Palestra : %s \n", ticket[numeroTicket].palestra);
     // Palestrante
     
-    printf(" Data .....: %d / %d / %d \n", palestra[ID_Palestra].dia, palestra[ID_Palestra].mes, palestra[ID_Palestra].ano);
-    printf(" Campus ...: %s \n", palestra[ID_Palestra].campus);
+    printf(" Data .....: %d / %d / %d \n", ticket[numeroTicket].dia, ticket[numeroTicket].mes, ticket[numeroTicket].ano);
+    printf(" Campus ...: %s \n", ticket[numeroTicket].campus);
 
     printf(" Assento ..: %c%d", ticket[numeroTicket].fila, ticket[numeroTicket].coluna);
 
@@ -1123,7 +1123,20 @@ void cadastrarTicket(char Fila, int Coluna)
 
 void pesquisarTicket()
 {
+
+    int ticketPessoa;
+
+    printf("Qual o numero do ticket ? : ");
+
+    scanf("%d%*c", &ticketPessoa);
+    fflush(stdin);
     
+    numeroTicket = ticketPessoa - 1;
+
+    LIMPA_TERM
+    exibirTicket();
+    getchar();
+    getchar();
 }
 
 
