@@ -216,8 +216,7 @@ int contadorDeTickets;
 
 
 
-void cadastrarTicket(char Fila, int Coluna);
-void exibirTicket();
+
 
 
 
@@ -552,7 +551,10 @@ void menu6();
     ========================================
 */
 
+void exibirTicket();
+void cadastrarTicket(char Fila, int Coluna);
 
+void pesquisarTicket();
 
 
 

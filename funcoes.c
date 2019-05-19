@@ -1036,6 +1036,49 @@ void pesquisarPorID()
     ====================================
 */
 
+/*
+    ====================================
+    $ Auxiliares_TICKET $
+    ====================================
+*/
+
+
+void exibirTicket()
+{   
+
+    char categoria[20];
+
+    interpretadorDeCategoria( ticket[numeroTicket].categoria, categoria );
+
+    printf("\n--------------- TICKET ---------------\n\n");
+    
+    printf("Numero do Ticket : %d\n\n", ( numeroTicket + 1 ) );
+
+
+    printf(" Nome .....: %s \n", ticket[numeroTicket].nomePessoa);
+    printf(" CPF ......: %ld \n", ticket[numeroTicket].CPF);
+    printf(" Categoria : %s \n\n", categoria);
+
+    printf(" Nome da Palestra : %s \n", palestra[ID_Palestra].nomePalestra);
+    // Palestrante
+    
+    printf(" Data .....: %d / %d / %d \n", palestra[ID_Palestra].dia, palestra[ID_Palestra].mes, palestra[ID_Palestra].ano);
+    printf(" Campus ...: %s \n", palestra[ID_Palestra].campus);
+
+    printf(" Assento ..: %c%d", ticket[numeroTicket].fila, ticket[numeroTicket].coluna);
+
+    printf("\n\n--------------------------------------\n\n");
+
+}
+
+
+/*
+    ====================================
+    $ Cadastrar_TICKET $
+    ====================================
+*/
+
+
 void cadastrarTicket(char Fila, int Coluna)
 {
 
@@ -1070,32 +1113,17 @@ void cadastrarTicket(char Fila, int Coluna)
 
 }
 
-void exibirTicket()
-{   
 
-    char categoria[20];
 
-    interpretadorDeCategoria( ticket[numeroTicket].categoria, categoria );
+/*
+    ====================================
+    $ Pesquisar_TICKET $
+    ====================================
+*/
 
-    printf("\n--------------- TICKET ---------------\n\n");
+void pesquisarTicket()
+{
     
-    printf("Numero do Ticket : %d\n\n", ( numeroTicket + 1 ) );
-
-
-    printf(" Nome .....: %s \n", ticket[numeroTicket].nomePessoa);
-    printf(" CPF ......: %ld \n", ticket[numeroTicket].CPF);
-    printf(" Categoria : %s \n\n", categoria);
-
-    printf(" Nome da Palestra : %s \n", palestra[ID_Palestra].nomePalestra);
-    // Palestrante
-    
-    printf(" Data .....: %d / %d / %d \n", palestra[ID_Palestra].dia, palestra[ID_Palestra].mes, palestra[ID_Palestra].ano);
-    printf(" Campus ...: %s \n", palestra[ID_Palestra].campus);
-
-    printf(" Assento ..: %c%d", ticket[numeroTicket].fila, ticket[numeroTicket].coluna);
-
-    printf("\n\n--------------------------------------\n\n");
-
 }
 
 
@@ -1104,3 +1132,4 @@ void exibirTicket()
     $ FIM_FUNCAO_TICKET $
     ************************************
 */
+
