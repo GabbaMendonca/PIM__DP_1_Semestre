@@ -1,10 +1,13 @@
 /**
-* @file Projeto do PIM
+* @file Projeto do PIM - Projto Integrado Multidisciplinar
 *
-* @brief Projeto completo do PIM com as funções integradas
+* @brief Este projeto academico foi desenvolvido pelos alunos da UNIP para o PIM.
+* O objetivo geral cadastrar uma pessoa para assistir uma palestra e gerar um ticket.
 *
-* @autor(es): Gabriel S. Mendonça, Gabriel A. Maranhão,
-*             Lucas Apolonio.
+* @autor(es):   Gabriel S. Mendonça,
+*               Gabriel A. Maranhão,
+*               Lucas Apolonio,
+*               Alexandre.
 *
 * @warning Documentar código é muito importante.
 * @todo - Lista do que implementar
@@ -48,11 +51,11 @@ void menu6()
         switch(opc)
         {
             case 1:
-                
+                pesquisarPessoa();
             break;
                 
             case 2:
-                
+                alteraDadosPalestra();
             break;
 
             case 0:
@@ -96,12 +99,13 @@ void menu4()
                 
             case 3:
             
-                if( reservarUmAssento(pessoa[numCadastro].categoria) )
+                if( reservarUmAssento(pessoa[ID_Pessoa].categoria) )
                 {
-                    continue;
+                    menuInicial();
                 }
                 else
-                {
+                {   
+                    LIMPA_TERM
                     exibirPessoa();
                     menu4();
                 }
@@ -126,12 +130,12 @@ void menuPesquisarPessoa()
     do
     {   
         LIMPA_TERM
-        printf("\n------------------------------");
-        printf("\n MENU 2.1 \n");
+        printf("\n-==-=-------------------------");
+        printf("\n MENU 2.1 PESQUISAR PESSOA \n");
         printf("\n (1) >>> Pesquisar por ID");
         printf("\n (2) >>> Pesquisar por CPF");
         printf("\n (3) >>> Exibir todas as pessoas cadastradas");
-        printf("\n (0) <<< Voltar\n\n");
+        printf("\n\n (0) <<< Voltar\n\n");
         
         printf("Digite uma opção : ");
 
@@ -163,11 +167,6 @@ void menuPesquisarPessoa()
     while(1);
 }
 
-void pesquisarPessoa()
-{
-    menuPesquisarPessoa();
-    menu4();
-}
 
 
 // MENU 03 - Pesquisar (Trello - Atividade 005) : https://trello.com/c/2hHh8WCf
@@ -178,7 +177,7 @@ void menuPesquisar()
     do
     {
         LIMPA_TERM
-        printf("\n------------------------------");
+        printf("\n-==---------------------------");
         printf("\n MENU 2 PESQUISAR \n");
         printf("\n (1) >>> Pesquisar Pessoa");
         printf("\n (2) >>> Pesquisar Palestra");
@@ -378,7 +377,7 @@ void teste_de_pessoa()
 {
     strcpy(pessoa[0].nome, "Ana");
     strcpy(pessoa[1].nome, "Beatriz");
-    strcpy(pessoa[2].nome, "Juliaz");
+    strcpy(pessoa[2].nome, "Julia");
     strcpy(pessoa[3].nome, "Bianca");
     strcpy(pessoa[4].nome, "Rosa");
     strcpy(pessoa[5].nome, "Sabrina");
@@ -411,7 +410,7 @@ void teste_de_pessoa()
 
     for(int j = 0; j < 10; j++)
     {
-        pessoa[j].cpf = 11111111111;
+        pessoa[j].cpf = 11111111111 + j;
         pessoa[j].idade = 21 + j;
 
         strcpy(pessoa[j].email, "unip.unip@unip.com");
@@ -459,10 +458,13 @@ void main()
 {
 
     contadorDePalestra = 1;
-    numPalestra = 0;
+    ID_Palestra = 0;
 
     contadorDeCadastros = 1;
-    numCadastro = 0;
+    ID_Pessoa = 0;
+
+    contadorDeTickets = 1;
+    numeroTicket = 0;
 
     teatro.filas = 0;
     teatro.colunas = 0;

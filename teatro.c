@@ -39,6 +39,27 @@
 
 
 
+
+
+
+
+
+
+
+/*
+    =======
+    FUNÇÕES
+    =======
+*/
+
+
+/*
+    ************************************
+    $ INICIO_FUNCOES_TEATRO $
+    ====================================
+*/
+
+
 void matriz()
 {
     teatro.filas++;
@@ -196,13 +217,14 @@ void mostrarMatriz()
 bool reservarUmAssento(int categoria)
 {
     int Coluna;
-    char Fila;
+    char Fila, f;
 
     LIMPA_TERM
     mostrarMatriz();
 
     do
     {
+
         printf("\n");
         printf("\n--------------------------------------");
         printf("\nNão queria estar aqui ???");
@@ -250,25 +272,74 @@ bool reservarUmAssento(int categoria)
             return false;
 
         }
+
+
+
+        if ( reservar(Fila, Coluna, categoria) )
+        {
+            LIMPA_TERM
+            mostrarMatriz();
+
+            printf("\n\nConfirmar a reserva no assento %c%d ? [S / N] : ", Fila , Coluna);
+
+            char opc2;
+            opc2 = getchar();
+            fflush(stdin);
+
+            switch(opc2)
+            {
+                case 's':
+                case 'S':
+
+                    cadastrarTicket(Fila, Coluna);
+                    
+                    printf("\n\n");
+                    printf("Dados gravados com sucesso !\n");
+
+                    contadorDeTickets++;
+                    printf("Pressione ENTER para exibir o ticket ... !");
+                    getchar();
+                    getchar();
+
+                    LIMPA_TERM
+                    exibirTicket();
+
+                    printf("Pressione qualquer tecla para contuniar ... !!!");
+                    getchar();
+                    getchar();
+
+                return true;
+
+                case 'n':
+                case 'N':
+                    
+                    limparAssento(Fila, Coluna);
+
+                    return false;
+                break;
+
+                default:
+                    printf("Opcão invalida!");
+                break;
+            }
+
+
+        }
         else
         {
-            return reservar(Fila, Coluna, categoria);
+            return false;
         }
+        
 
 
     }
-    while(1);
+    while(true);
 }
 
 
 bool reservar(char Fila, int Coluna, int categoria)
 {
     Fila = Fila - 64;
-            
-    // printf("(1) >>> Usuario Comum\n");
-    // printf("(2) >>> Professor\n");
-    // printf("(3) >>> Convidado\n");
-    // printf("(4) >>> Deficiente\n\n");
 
     /*
         Usuario comum
@@ -341,3 +412,16 @@ bool reservar(char Fila, int Coluna, int categoria)
     return true;
 
 }
+
+
+void limparAssento(char Fila, int Coluna)
+{
+    Fila = Fila - 64;
+    teatro.matriz[Fila][Coluna] = ' ';
+}
+
+/*
+    ====================================
+    $ FIM_FUNCOES_TEATRO $
+    ************************************
+*/

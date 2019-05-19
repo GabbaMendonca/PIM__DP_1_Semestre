@@ -69,7 +69,7 @@ int contadorDePalestra;
  * @brief Recebe o valor a ser acessdo na scruct
  * 
  */
-int numPalestra;
+int ID_Palestra;
 
 /*
     ===============================
@@ -126,7 +126,7 @@ int contadorDeCadastros;
  * @brief Recebe o valor a ser acessdo na scruct
  * 
  */
-int numCadastro;
+int ID_Pessoa;
 
 /*
     ===============================
@@ -167,6 +167,10 @@ struct DADOS_MATRIZ
 
 struct DADOS_MATRIZ teatro;
 
+
+
+
+
 /*
     ===============================
     $ STRUCT_FIM_TEATRO $
@@ -175,12 +179,76 @@ struct DADOS_MATRIZ teatro;
 
 
 
+
+
+struct TICKET
+{
+
+    long CPF;
+    char nomePessoa[SIZE];
+    int categoria;
+
+    char palestra[MED];
+    char Palestrante[MED];
+
+    int dia;
+    int mes;
+    int ano;
+
+    int hora;
+    int min;
+
+    char campus[MED];
+
+    char fila;
+    int coluna;
+
+};
+
+struct TICKET ticket[VETOR];
+
+
+int numeroTicket;
+
+int contadorDeTickets;
+
+
+
+
+
+void cadastrarTicket(char Fila, int Coluna);
+void exibirTicket();
+
+
+
+
+
+
+
+
+
+
+// Criando uma variavel Booleana
 // Criando a enumeração:
 enum boolean {
     true = 1, false = 0
 };
 // Permitindo a sua declaração como um tipo qualquer:
 typedef  enum boolean  bool;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -212,7 +280,7 @@ typedef  enum boolean  bool;
 
 /*
     ========================================
-    $ PROTOTIPOS_INICIO_CADASTRAR_PALESTRA $
+    $ PROTOTIPOS_PALESTRA $
     ========================================
 */
 
@@ -245,7 +313,7 @@ void exibirPalestra();
 /**
  * @brief Contem a rotina de alterar dados caso ja cadastrados no sistema caso seja preciso.
  * 
- *      OBS : A posicao do vetor na variavel global numPalestra ja deve ter sido ajustado para a posição desejada.
+ *      OBS : A posicao do vetor na variavel global ID_Palestra ja deve ter sido ajustado para a posição desejada.
  * 
  */
 void alteraDadosPalestra();
@@ -289,7 +357,7 @@ void cadastrarPessoa();
  * 
  * @param categoria o paramento vem da função cadastar possoa e indica o tipo de pessoa a ser cadastrado.
  */
-void Pessoa(int categoria);
+void inserirPessoa(int categoria);
 
 void inserirCpf();
 void inserirNome();
@@ -302,11 +370,14 @@ void inserirEmail();
  * @param numDoCadastro Recebe o ID do cadasatro a ser buscado para exibição
  */
 void exibirPessoa();
+void interpretadorDeCategoria(int numDaCategoria, char * RetornaStringCategoria);
+
+//char *interpretadorDeCategoria(int numDaCategoria);
 
 /**
  * @brief Contem a rotina de alterar dados caso ja cadastrados no sistema caso seja preciso.
  * 
- * @obs A posicao do vetor na variavel global numCadastro ja deve ter sido ajustado para a posição desejada.
+ * @obs A posicao do vetor na variavel global ID_Pessoa ja deve ter sido ajustado para a posição desejada.
  * 
  */
 void alteraDadosPessoa();
@@ -326,6 +397,7 @@ void mostarTodasAsPessoas();
 void exibirTodasAsPessoasCadastradas();
 void pesquisarPorCPF();
 void pesquisarPorID();
+void mostarTodasAsPalestras();
 /*
     ========================================
     $ PROTOTIPOS_FIM_PESQUISA_DE_PESSOA $
@@ -337,7 +409,7 @@ void pesquisarPorID();
     ========================================
 */
 void editarCadastro();
-void inserirCategoria();
+int inserirCategoria();
 /*
     ========================================
     $ PROTOTIPOS_FIM_EDITAR_CADASTRO $
@@ -441,6 +513,8 @@ bool reservar(char Fila, int Coluna, int categoria);
 
 int assentos(int **matrizAssentos, char fila, int coluna, int categoria);
 
+void limparAssento(char Fila, int Coluna);
+
 
 
 
@@ -468,6 +542,20 @@ void menu6();
     $ PROTOTIPOS_INICIO_MENUS $
     ========================================
 */
+
+
+
+
+/*
+    ========================================
+    $ PROTOTIPOS_INICIO_TICKET $
+    ========================================
+*/
+
+
+
+
+
 /*
     ==========================
     FIM PROTOTIPOS DAS FUNÇÕES

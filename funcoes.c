@@ -10,7 +10,7 @@
     =======
     FUNÇÕES
     =======
-*
+*/
 /*
     ====================================
     $ FUNCAO_INICIO_TEMPO $
@@ -36,9 +36,37 @@ int ano()
 
 
 
+
+
+
+
+/*
+    ************************************
+    $ INICIO_FUNCOES_PALESTRA $
+    ====================================
+*/
+
 /*
     ====================================
-    $ FUNCAO_INICIO_CADASTRAR_PALESTRA $
+    $ AUXILIARES_PALESTRA $
+    ====================================
+*/
+
+
+void exibirPalestra()
+{
+
+    LIMPA_TERM
+    printf("Nome da Paletra ... : %s\n", palestra[ID_Palestra].nomePalestra);
+    printf("Campus ............ : %s\n", palestra[ID_Palestra].campus);
+    printf("Data .............. : %d / %d / %d - %d : %d\n", palestra[ID_Palestra].dia, palestra[ID_Palestra].mes, palestra[ID_Palestra].ano, palestra[ID_Palestra].hora, palestra[ID_Palestra].min);
+
+}        
+
+
+/*
+    ====================================
+    $ Cadastrar_PALESTRA $
     ====================================
 */
 
@@ -48,7 +76,7 @@ void cadastrarPalestra()
     LIMPA_TERM
     printf("\n-=-==-------------------------\n");
     printf("Numero da Palestra : %d\n", (contadorDePalestra));
-    numPalestra = contadorDePalestra - 1;
+    ID_Palestra = contadorDePalestra - 1;
 
     exibirPalestra();
     inserirPalestra();
@@ -81,7 +109,7 @@ void cadastrarPalestra()
                 printf("Dados gravados com sucesso !\n");
                 // GRAVAR DADOS
                 contadorDePalestra++;
-                printf("Pressione ENTER para sair ... !");
+                printf("Pressione ENTER para continuar ... !");
                 getchar();
                 getchar();
             return;
@@ -97,7 +125,7 @@ void cadastrarPalestra()
         }
     }
     while(1);
-}   /* Fim cadastrarPalestra */
+}
 
 
 
@@ -105,14 +133,14 @@ void cadastrarPalestra()
 void inserirPalestra()
 {    
     printf("\nNome da Palestra : ");
-    fgets(palestra[numPalestra].nomePalestra,MED,stdin);
+    fgets(palestra[ID_Palestra].nomePalestra,MED,stdin);
 }
 
 
 void inserirCampus()
 {   
     printf("\nCampus : ");
-    fgets(palestra[numPalestra].campus,MED,stdin);
+    fgets(palestra[ID_Palestra].campus,MED,stdin);
 }
 
 
@@ -123,11 +151,11 @@ void inserirData()
         /*
             Evita aparecer lixo quando mostrar a exibir a palestra
         */
-        palestra[numPalestra].dia = 0;
-        palestra[numPalestra].mes = 0;
-        palestra[numPalestra].ano = 0;
-        palestra[numPalestra].hora = 0;
-        palestra[numPalestra].min = 0;
+        palestra[ID_Palestra].dia = 0;
+        palestra[ID_Palestra].mes = 0;
+        palestra[ID_Palestra].ano = 0;
+        palestra[ID_Palestra].hora = 0;
+        palestra[ID_Palestra].min = 0;
 
 
         exibirPalestra();
@@ -138,10 +166,10 @@ void inserirData()
         do
         {
             printf("Digite apenas o Dia : ");
-            scanf("%d%*c", &palestra[numPalestra].dia);
+            scanf("%d%*c", &palestra[ID_Palestra].dia);
 
-                if (palestra[numPalestra].dia >  0   && 
-                    palestra[numPalestra].dia <= 31  )
+                if (palestra[ID_Palestra].dia >  0   && 
+                    palestra[ID_Palestra].dia <= 31  )
                 {
                     break;
                 }
@@ -163,10 +191,10 @@ void inserirData()
         do
         {
             printf("Digite apenas o Mes : ");
-            scanf("%d%*c", &palestra[numPalestra].mes);
+            scanf("%d%*c", &palestra[ID_Palestra].mes);
 
-                if (palestra[numPalestra].mes >  0   &&
-                    palestra[numPalestra].mes <= 12  )
+                if (palestra[ID_Palestra].mes >  0   &&
+                    palestra[ID_Palestra].mes <= 12  )
                 {
                     break;
                 }
@@ -188,9 +216,9 @@ void inserirData()
         do
         {
             printf("Digite apenas o Ano : ");
-            scanf("%d%*c", &palestra[numPalestra].ano);
+            scanf("%d%*c", &palestra[ID_Palestra].ano);
 
-                if (palestra[numPalestra].ano >= ano() && palestra[numPalestra].ano < (ano() + 10))
+                if (palestra[ID_Palestra].ano >= ano() && palestra[ID_Palestra].ano < (ano() + 10))
                 {
                     break;
                 }
@@ -212,10 +240,10 @@ void inserirData()
         do
         {
             printf("Digite apenas o Hora : ");
-            scanf("%d%*c", &palestra[numPalestra].hora);
+            scanf("%d%*c", &palestra[ID_Palestra].hora);
 
-                if (palestra[numPalestra].hora >= 0  &&
-                    palestra[numPalestra].hora <  24 )
+                if (palestra[ID_Palestra].hora >= 0  &&
+                    palestra[ID_Palestra].hora <  24 )
                 {
                     break;
                 }
@@ -237,10 +265,10 @@ void inserirData()
         do
         {
             printf("Digite apenas o Minuto : ");
-            scanf("%d%*c", &palestra[numPalestra].min);
+            scanf("%d%*c", &palestra[ID_Palestra].min);
 
-                if (palestra[numPalestra].min >= 0   &&
-                    palestra[numPalestra].min <  60  )
+                if (palestra[ID_Palestra].min >= 0   &&
+                    palestra[ID_Palestra].min <  60  )
                 {
                     break;
                 }
@@ -259,20 +287,11 @@ void inserirData()
 }
 
 
-
-
-void exibirPalestra()
-{
-
-    LIMPA_TERM
-    printf("Nome da Paletra ... : %s\n", palestra[numPalestra].nomePalestra);
-    printf("Campus ............ : %s\n", palestra[numPalestra].campus);
-    printf("Data .............. : %d / %d / %d - %d : %d\n", palestra[numPalestra].dia, palestra[numPalestra].mes, palestra[numPalestra].ano, palestra[numPalestra].hora, palestra[numPalestra].min);
-
-}        
-
-
-
+/*
+    ====================================
+    $ Editar_PALESTRA $
+    ====================================
+*/
 
 
 void alteraDadosPalestra()
@@ -280,9 +299,9 @@ void alteraDadosPalestra()
 
     LIMPA_TERM
     //fflush(stdin);
-    printf("( 1 ) >>> Nome da Paletra ... : %s", palestra[numPalestra].nomePalestra);
-    printf("( 2 ) >>> Campus ............ : %s", palestra[numPalestra].campus);
-    printf("( 3 ) >>> Data .............. : %d / %d / %d - %d : %d\n", palestra[numPalestra].dia, palestra[numPalestra].mes, palestra[numPalestra].ano, palestra[numPalestra].hora, palestra[numPalestra].min);
+    printf("( 1 ) >>> Nome da Paletra ... : %s", palestra[ID_Palestra].nomePalestra);
+    printf("( 2 ) >>> Campus ............ : %s", palestra[ID_Palestra].campus);
+    printf("( 3 ) >>> Data .............. : %d / %d / %d - %d : %d\n", palestra[ID_Palestra].dia, palestra[ID_Palestra].mes, palestra[ID_Palestra].ano, palestra[ID_Palestra].hora, palestra[ID_Palestra].min);
 
     printf("\n( 0 ) <<< Voltar\n");
 
@@ -317,63 +336,304 @@ void alteraDadosPalestra()
 }
 
 /*
-    =================================
-    $ FUNCAO_FIM_CADASTRAR_PALESTRA $
-    =================================
+    ====================================
+    $ Pesquisar_PALESTRA $
+    ====================================
 */
+
+
+void pesquisarPalestra()
+{
+    LIMPA_TERM
+    if(palestra[0].dia == 0)
+    {
+        printf("Nenhuma palestra esta cadastrada");
+    }
+    else
+    {
+        printf("\n-==-==------------------------\n");
+        mostarTodasAsPalestras();
+
+        printf("\n(0) <<< Voltar\n");
+
+        printf("\nDigite o numero da palestra para ver os detalhes : ");
+
+        int opc;
+        scanf("%d%*c", &opc);
+        fflush(stdin);
+
+        if (opc == 0)
+        {
+            menuPesquisar();
+        }
+
+        ID_Palestra = (opc - 1);
+        exibirPalestra();
+
+        validarPalestra();
+
+        printf("\n\nDeseja confirmar  ? ( S / N ) : ");
+
+        char opc2;
+        opc2 = getchar();
+        fflush(stdin);
+
+        switch(opc2)
+        {
+            case 's':
+            case 'S':
+
+                menu6();
+                // printf("Função ainda não produzida!");
+                // getchar();
+                // getchar();
+            return;
+
+            case 'n':
+            case 'N':
+                printf("Função ainda não produzida!");
+                getchar();
+                getchar();
+            break;
+
+            default:
+                printf("Opcão invalida!");
+            break;
+        }
+    }
+}
+
+
+
+
+void mostarTodasAsPalestras()
+{
+
+    printf("| Num  |  Palestra\n\n");
+
+    for(int i = 0; i < (contadorDePalestra - 1); i++)
+    {
+        if(i < 9)
+        {
+            printf("| 0%d   >  %s\n", (i + 1), palestra[i].nomePalestra);
+        }
+        else
+        {
+            printf("| %d   >  %s\n", (i + 1), palestra[i].nomePalestra);
+        }
+        
+    }
+
+}
+
+
+void validarPalestra()
+{   
+
+    time_t data_tempo;
+    time(&data_tempo);
+    
+    struct tm *tempo = localtime(&data_tempo);
+
+    if (palestra[ID_Palestra].lugaresOcupados >= palestra[ID_Palestra].qtdMaxLugares)
+    {
+        goto ESGOTADA;
+    }
+
+    if (palestra[ID_Palestra].ano < ano())
+    {
+        goto MINISTRADA;
+    }
+    else 
+    {
+        if(palestra[ID_Palestra].ano == ano())
+        {
+            if(palestra[ID_Palestra].mes < tempo->tm_mon+1)
+            {
+                goto MINISTRADA;
+            }
+            else
+            { 
+                if(palestra[ID_Palestra].dia < tempo->tm_mday)
+                {
+                    goto MINISTRADA;
+                }
+                else
+                {
+                    return;
+                }
+            }
+        }
+        else
+        {
+            return;
+        }
+    }
+    
+    
+
+    MINISTRADA:
+    
+        printf("\n");
+        printf("\n ALERTA !!!");
+        printf("\n Pelestra ja foi ministrada !!!");
+
+        printf("\n\n Pressione enter para escolher outra palestra ...");
+        getchar();
+        pesquisarPalestra();
+
+    ESGOTADA:
+
+        printf("\n");
+        printf("\n ALERTA !!!");
+        printf("\n Pelestra esta esgotada !!!");
+
+        printf("\n\n Pressione enter para escolher outra palestra ...");
+        getchar();
+        pesquisarPalestra();
+
+}
+
+
 /*
     ====================================
-    $ FUNCAO_INICIO_CADASTRAR_PESSOA $
+    $ FIM_FUNCOES_PALESTRA $
+    ************************************
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+    ************************************
+    $ INICIO_FUNCOES_PESSOA $
+    ====================================
+*/
+
+/*
+    ====================================
+    $ Auxilares_PESSOA $
+    ====================================
+*/
+
+
+void exibirPessoa()
+{   
+    char categoria[20];
+    interpretadorDeCategoria( pessoa[ID_Pessoa].categoria, categoria );
+
+    //strcpy(categoria, interpretadorDeCategoria( pessoa[ID_Pessoa].categoria ) ); 
+
+    printf("CPF ............... : %ld\n", pessoa[ID_Pessoa].cpf);
+    printf("Nome .............. : %s\n",   pessoa[ID_Pessoa].nome);
+    printf("Idade ............. : %d\n", pessoa[ID_Pessoa].idade);
+    printf("Email ............. : %s\n",   pessoa[ID_Pessoa].email);
+    printf("Categoria ......... : %s\n",   categoria);
+
+}
+
+
+void interpretadorDeCategoria(int numDaCategoria, char * RetornaStringCategoria)
+{
+    
+    if( numDaCategoria == 1)
+    {
+        strcpy(RetornaStringCategoria, "Usuario Comum");
+    }
+    if(numDaCategoria == 2)
+    {
+        strcpy(RetornaStringCategoria, "Professor");
+    }
+    if(numDaCategoria == 3)
+    {
+        strcpy(RetornaStringCategoria, "Convidado");
+    }
+    if(numDaCategoria == 4)
+    {
+        strcpy(RetornaStringCategoria, "Deficiente");
+    }
+}
+
+
+
+// char *interpretadorDeCategoria(int numDaCategoria)
+// {
+//     char StringCategoria[20];
+
+//     if( numDaCategoria == 1)
+//     {
+//         strcpy(StringCategoria, "Usuario Comum");
+//     }
+//     if(numDaCategoria == 2)
+//     {
+//         strcpy(StringCategoria, "Professor");
+//     }
+//     if(numDaCategoria == 3)
+//     {
+//         strcpy(StringCategoria, "Convidado");
+//     }
+//     if(numDaCategoria == 4)
+//     {
+//         strcpy(StringCategoria, "Deficiente");
+//     }
+
+//     return StringCategoria;
+// }
+
+
+/*
+    ====================================
+    $ Cadastrar_PESSOA $
     ====================================
 */
 
 void cadastrarPessoa()
 {
-    bool _while;
-    _while = true;
+    bool _while = true;
 
     do
     {
+
         LIMPA_TERM
         printf("\n-=-=--------------------------\n");
         printf("Numero do Cadastro : %d\n\n", contadorDeCadastros);
-        numCadastro = contadorDeCadastros - 1;
+
+        ID_Pessoa = contadorDeCadastros - 1;
 
         printf("Você quer cadastrar um ?\n\n");
 
-        printf("(1) >>> Usuario Comum\n");
-        printf("(2) >>> Professor\n");
-        printf("(3) >>> Convidado\n");
-        printf("(4) >>> Deficiente\n\n");
+        int categoria = inserirCategoria();
 
-        printf("(0) <<< Voltar\n\n");
-
-        int opc;
-        printf("Opção: ");
-        scanf("%d%*c", &opc);
-        fflush(stdin);
-
-        if(opc == 0)
+        if( 0 == categoria)
         {
             return;
         }
-        else if(opc > 0 && opc < 5)
-        {
-            Pessoa(opc);
-            _while = false;
-        }
         else
         {
-            _while = true;
+            inserirPessoa(categoria);
+            _while = false;
         }
-            
+
     }
     while(_while);
 
 
-/*
-    ======
-*/
 
 
     _while = true;
@@ -397,9 +657,15 @@ void cadastrarPessoa()
             case 'S':
 
                 printf("Dados gravados com sucesso !\n");
+
                 // GRAVAR DADOS
+
                 contadorDeCadastros++;
-                palestra[numPalestra].lugaresOcupados = palestra[numPalestra].lugaresOcupados++;
+
+                //palestra[ID_Palestra].lugaresOcupados = palestra[ID_Palestra].lugaresOcupados++;
+
+                palestra[ID_Palestra].lugaresOcupados++;
+
                 _while = false;
 
                 printf("Pressione ENTER para continuar ... !");
@@ -419,6 +685,8 @@ void cadastrarPessoa()
         }
     }
     while(_while);
+
+
 
 
     printf("\n\nDeseja escolher uma palestra agora ? ( S / N ) : ");
@@ -444,19 +712,13 @@ void cadastrarPessoa()
             printf("Opcão invalida!");
         break;
     }
+    
 }
 
 
 
 
-/*
-    ======
-*/
-
-
-
-
-void Pessoa(int categoria)
+void inserirPessoa(int categoria)
 {
 
     LIMPA_TERM
@@ -483,116 +745,100 @@ void Pessoa(int categoria)
     printf("\n\n");
     inserirEmail();
 
-    pessoa[numCadastro].categoria = categoria;
+    pessoa[ID_Pessoa].categoria = categoria;
 
 }
+
+
+
 
 void inserirCpf()
 {
     printf("Digite seu CPF: ");
-    scanf("%ld%*c", &pessoa[numCadastro].cpf);
+    scanf("%ld%*c", &pessoa[ID_Pessoa].cpf);
     fflush(stdin);
 }
 
 void inserirNome()
 {   
     printf("Digite seu nome: ");
-    fgets(pessoa[numCadastro].nome, SIZE, stdin);
+    fgets(pessoa[ID_Pessoa].nome, SIZE, stdin);
     fflush(stdin);
 }
 
 void inserirIdade()
 {
     printf("Digite sua idade: ");
-    scanf("%d%*c", &pessoa[numCadastro].idade);
+    scanf("%d%*c", &pessoa[ID_Pessoa].idade);
     fflush(stdin);
 }
 
 void inserirEmail()
 {
     printf("Digite seu email: ");
-    fgets(pessoa[numCadastro].email, SIZE, stdin);
+    fgets(pessoa[ID_Pessoa].email, SIZE, stdin);
     fflush(stdin);
 }
 
-
-
-
-/*
-    ======
-*/
-
-
-
-
-
-void exibirPessoa()
+int inserirCategoria()
 {   
+    do
+    {
+        printf("(1) >>> Usuario Comum\n");
+        printf("(2) >>> Professor\n");
+        printf("(3) >>> Convidado\n");
+        printf("(4) >>> Deficiente\n\n");
 
-    char categoria[16];
-    
-    if(pessoa[numCadastro].categoria == 1)
-    {
-        strcpy(categoria, "Usuario Comum");
-    }
-    if(pessoa[numCadastro].categoria == 2)
-    {
-        strcpy(categoria, "Professor");
-    }
-    if(pessoa[numCadastro].categoria == 3)
-    {
-        strcpy(categoria, "Convidado");
-    }
-    if(pessoa[numCadastro].categoria == 4)
-    {
-        strcpy(categoria, "Deficiente");
-    }
-    
-    printf("CPF ............... : %ld\n", pessoa[numCadastro].cpf);
-    printf("Nome .............. : %s\n",   pessoa[numCadastro].nome);
-    printf("Idade ............. : %d\n", pessoa[numCadastro].idade);
-    printf("Email ............. : %s\n",   pessoa[numCadastro].email);
-    printf("Categoria ......... : %s\n",   categoria);
+        printf("(0) <<< Voltar\n\n");
 
+        printf("Digite a catogoria : ");
+
+        int opc;
+        scanf("%d%*c", &opc);
+        fflush(stdin);
+
+        if(opc == 0)
+        {
+            return opc;
+        }
+        else if(opc > 0 && opc < 5)
+        {
+            return opc;
+        }
+        else
+        {
+            printf("Categoria invalida\n\n");
+        }
+    }
+    while(true);
 }
 
 
-
 /*
-    ======
+    ====================================
+    $ Editar_PESSOA $
+    ====================================
 */
 
 
+void editarCadastro()
+{
+    alteraDadosPessoa();
+}
 
 
 void alteraDadosPessoa()
 {
     
-    char categoria[16];
+    char categoria[20];
     
-    if(pessoa[numCadastro].categoria == 1)
-    {
-        strcpy(categoria, "Usuario Comum");
-    }
-    if(pessoa[numCadastro].categoria == 2)
-    {
-        strcpy(categoria, "Professor");
-    }
-    if(pessoa[numCadastro].categoria == 3)
-    {
-        strcpy(categoria, "Convidado");
-    }
-    if(pessoa[numCadastro].categoria == 4)
-    {
-        strcpy(categoria, "Deficiente");
-    }
-
+    interpretadorDeCategoria( pessoa[ID_Pessoa].categoria, categoria);
 
     LIMPA_TERM
-    printf("( 1 ) >>> CPF ............... : %ld\n", pessoa[numCadastro].cpf);
-    printf("( 2 ) >>> Nome .............. : %s\n",   pessoa[numCadastro].nome);
-    printf("( 3 ) >>> Idade ............. : %d\n", pessoa[numCadastro].idade);
-    printf("( 4 ) >>> Email ............. : %s\n",   pessoa[numCadastro].email);
+    printf("( 1 ) >>> CPF ............... : %ld\n", pessoa[ID_Pessoa].cpf);
+    printf("( 2 ) >>> Nome .............. : %s\n",   pessoa[ID_Pessoa].nome);
+    printf("( 3 ) >>> Idade ............. : %d\n", pessoa[ID_Pessoa].idade);
+    printf("( 4 ) >>> Email ............. : %s\n",   pessoa[ID_Pessoa].email);
     printf("( 5 ) >>> Categoria ......... : %s\n",   categoria);
 
     printf("\n( 0 ) <<< Voltar\n");
@@ -635,199 +881,22 @@ void alteraDadosPessoa()
     }
 }
 
+
 /*
     ====================================
-    $ FUNCAO_FIM_CADASTRAR_PESSOA $
+    $ Pesquisar_PESSOA $
     ====================================
 */
-/*
-    ======================================
-    $ FUNCAO_INICIO_PESQUISA_DE_PALESTRA $
-    ======================================
-*/
 
-void mostarTodasAsPalestras()
+
+
+void pesquisarPessoa()
 {
-
-    printf("| Num  |  Palestra\n\n");
-
-    for(int i = 0; i < (contadorDePalestra - 1); i++)
-    {
-        if(i < 9)
-        {
-            printf("| 0%d   >  %s\n", (i + 1), palestra[i].nomePalestra);
-        }
-        else
-        {
-            printf("| %d   >  %s\n", (i + 1), palestra[i].nomePalestra);
-        }
-        
-    }
-
+    menuPesquisarPessoa();
+    menu4();
 }
 
 
-void validarPalestra()
-{   
-
-    time_t data_tempo;
-    time(&data_tempo);
-    
-    struct tm *tempo = localtime(&data_tempo);
-
-    if (palestra[numPalestra].lugaresOcupados >= palestra[numPalestra].qtdMaxLugares)
-    {
-        goto ESGOTADA;
-    }
-
-    if (palestra[numPalestra].ano < ano())
-    {
-        goto MINISTRADA;
-    }
-    else 
-    {
-        if(palestra[numPalestra].ano == ano())
-        {
-            if(palestra[numPalestra].mes < tempo->tm_mon+1)
-            {
-                goto MINISTRADA;
-            }
-            else
-            { 
-                if(palestra[numPalestra].dia < tempo->tm_mday)
-                {
-                    goto MINISTRADA;
-                }
-                else
-                {
-                    return;
-                }
-            }
-        }
-        else
-        {
-            return;
-        }
-    }
-    
-    
-
-    MINISTRADA:
-    
-        printf("\n");
-        printf("\n ALERTA !!!");
-        printf("\n Pelestra ja foi ministrada !!!");
-
-        printf("\n\n Pressione enter para escolher outra palestra ...");
-        getchar();
-        pesquisarPalestra();
-
-    ESGOTADA:
-
-        printf("\n");
-        printf("\n ALERTA !!!");
-        printf("\n Pelestra esta esgotada !!!");
-
-        printf("\n\n Pressione enter para escolher outra palestra ...");
-        getchar();
-        pesquisarPalestra();
-
-}
-
-void pesquisarPalestra()
-{
-    LIMPA_TERM
-    if(palestra[0].dia == 0)
-    {
-        printf("Nenhuma palestra esta cadastrada");
-    }
-    else
-    {
-        mostarTodasAsPalestras();
-
-        printf("\n(0) <<< Voltar\n");
-
-        printf("\nDigite o numero da palestra para ver os detalhes : ");
-
-        int opc;
-        scanf("%d%*c", &opc);
-        fflush(stdin);
-
-        if (opc == 0)
-        {
-            menuPesquisar();
-        }
-
-        numPalestra = (opc - 1);
-        exibirPalestra();
-
-        validarPalestra();
-
-        printf("\n\nDeseja confirmar  ? ( S / N ) : ");
-
-        char opc2;
-        opc2 = getchar();
-        fflush(stdin);
-
-        switch(opc2)
-        {
-            case 's':
-            case 'S':
-
-                menu6();
-                // printf("Função ainda não produzida!");
-                // getchar();
-                // getchar();
-            return;
-
-            case 'n':
-            case 'N':
-                printf("Função ainda não produzida!");
-                getchar();
-                getchar();
-            break;
-
-            default:
-                printf("Opcão invalida!");
-            break;
-        }
-    }
-}
-
-
-
-/*
-    ======================================
-    $ FUNCAO_FIM_PESQUISA_DE_PALESTRA $
-    ======================================
-*/
-/*
-    ======================================
-    $ FUNCAO_INICIO_PESQUISA_DE_PESSOA $
-    ======================================
-*/
-
-//(Trello - Atividade 006) : https://trello.com/c/z2Bv6kdl
-
-void mostarTodasAsPessoas()
-{
-
-    printf("| Num  |  Pessoas\n\n");
-
-    for(int i = 0; i < (contadorDeCadastros - 1); i++)
-    {
-        if(i < 9)
-        {
-            printf("| 0%d   >  %s\n", (i + 1), pessoa[i].nome);
-        }
-        else
-        {
-            printf("| %d   >  %s\n", (i + 1), pessoa[i].nome);
-        }
-        
-    }
-
-}
 
 
 void exibirTodasAsPessoasCadastradas()
@@ -853,7 +922,8 @@ void exibirTodasAsPessoasCadastradas()
             menuPesquisarPessoa();
         }
 
-        numCadastro = opc - 1;
+        ID_Pessoa = opc - 1;
+        LIMPA_TERM
         exibirPessoa();
 
         printf("\n\nDeseja confirmar  ? ( S / N ) : ");
@@ -886,6 +956,28 @@ void exibirTodasAsPessoasCadastradas()
     }
 }
 
+//(Trello - Atividade 006) : https://trello.com/c/z2Bv6kdl
+
+void mostarTodasAsPessoas()
+{
+
+    printf("| Num  |  Pessoas\n\n");
+
+    for(int i = 0; i < (contadorDeCadastros - 1); i++)
+    {
+        if(i < 9)
+        {
+            printf("| 0%d   >  %s\n", (i + 1), pessoa[i].nome);
+        }
+        else
+        {
+            printf("| %d   >  %s\n", (i + 1), pessoa[i].nome);
+        }
+        
+    }
+
+}
+
 
 void pesquisarPorCPF()
 {
@@ -898,14 +990,15 @@ void pesquisarPorCPF()
     {
         if(CPF == pessoa[i].cpf)
         {   
-            numCadastro = i;
+            ID_Pessoa = i;
+            LIMPA_TERM
             exibirPessoa();
             return;
         }
     }
 
     printf("Não encontrei !");
-    return;
+    pesquisarPessoa();
 }
 
 
@@ -917,55 +1010,97 @@ void pesquisarPorID()
     int ID;
     scanf("%d%*c", &ID);
 
-    numCadastro = ID - 1;
+    ID_Pessoa = ID - 1;
     exibirPessoa();
 }
 
 
+
+
 /*
-    ======================================
-    $ FUNCAO_FIM_PESQUISA_DE_PESSOA $
-    ======================================
+    ====================================
+    $ FIM_FUNCAO_PESSOA $
+    ************************************
 */
 
+
+
+
+
+
+
+
 /*
-    =================================
-    $ FUNCAO_INICIO_EDITAR_CADASTRO $
-    =================================
+    ************************************
+    $ INICIO_FUNCOES_TICKET $
+    ====================================
 */
 
-void editarCadastro()
-{
-    alteraDadosPessoa();
-}
-
-void inserirCategoria()
+void cadastrarTicket(char Fila, int Coluna)
 {
 
-    printf("(1) >>> Usuario Comum\n");
-    printf("(2) >>> Professor\n");
-    printf("(3) >>> Convidado\n");
-    printf("(4) >>> Deficiente\n\n");
+    numeroTicket = contadorDeTickets - 1;
 
-    printf("Digite a catogoria : ");
-    
-    int opc;
-    scanf("%d%*c", &opc);
-    fflush(stdin);
 
-    if(opc > 0 && opc < 5)
-    {
-        pessoa[numCadastro].categoria = opc;
-    }
-    else
-    {
-        printf("Categoria invalida\n\n");
-    }
-    
+    // Pessoa
+    strcpy(ticket[numeroTicket].nomePessoa, pessoa[ID_Pessoa].nome);
+
+    ticket[numeroTicket].CPF = pessoa[ID_Pessoa].cpf;
+    ticket[numeroTicket].categoria = pessoa[ID_Pessoa].categoria;
+
+
+
+
+    // Palestra
+    strcpy(ticket[numeroTicket].palestra, palestra[ID_Pessoa].nomePalestra);
+    // Palestrante
+    ticket[numeroTicket].dia = palestra[ID_Palestra].dia;
+    ticket[numeroTicket].mes = palestra[ID_Palestra].mes;
+    ticket[numeroTicket].ano = palestra[ID_Palestra].ano;
+    ticket[numeroTicket].hora = palestra[ID_Palestra].hora;
+    ticket[numeroTicket].min = palestra[ID_Palestra].min;
+    strcpy(ticket[numeroTicket].campus, palestra[ID_Pessoa].campus);
+
+
+
+
+    // assento
+    strcpy(&ticket[numeroTicket].fila, &Fila);
+    ticket[numeroTicket].coluna = Coluna;
+
 }
+
+void exibirTicket()
+{   
+
+    char categoria[20];
+
+    interpretadorDeCategoria( ticket[numeroTicket].categoria, categoria );
+
+    printf("\n--------------- TICKET ---------------\n\n");
+    
+    printf("Numero do Ticket : %d\n\n", ( numeroTicket + 1 ) );
+
+
+    printf(" Nome .....: %s \n", ticket[numeroTicket].nomePessoa);
+    printf(" CPF ......: %ld \n", ticket[numeroTicket].CPF);
+    printf(" Categoria : %s \n\n", categoria);
+
+    printf(" Nome da Palestra : %s \n", palestra[ID_Palestra].nomePalestra);
+    // Palestrante
+    
+    printf(" Data .....: %d / %d / %d \n", palestra[ID_Palestra].dia, palestra[ID_Palestra].mes, palestra[ID_Palestra].ano);
+    printf(" Campus ...: %s \n", palestra[ID_Palestra].campus);
+
+    printf(" Assento ..: %c%d", ticket[numeroTicket].fila, ticket[numeroTicket].coluna);
+
+    printf("\n\n--------------------------------------\n\n");
+
+}
+
 
 /*
-    =================================
-    $ FUNCAO_INICIO_EDITAR_CADASTRO $
-    =================================
+    ====================================
+    $ FIM_FUNCAO_TICKET $
+    ************************************
 */
